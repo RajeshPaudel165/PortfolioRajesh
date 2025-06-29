@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/rajeshport/static/css/main.8da3fa10.css",
+    "main.js": "/rajeshport/static/js/main.ee6508f1.js",
+    "static/media/macOSdark.png": "/rajeshport/static/media/macOSdark.ea26d7aee074e82daec1.png",
+    "static/media/docs-icon.png": "/rajeshport/static/media/docs-icon.94c5a6fd6763983d1dd4.png",
+    "static/media/education-icon.png": "/rajeshport/static/media/education-icon.df378d9c4de9e0a6a87c.png",
+    "static/media/macOS.jpg": "/rajeshport/static/media/macOS.46b97d1cbbe7d0caca4b.jpg",
+    "static/media/weather-icon.png": "/rajeshport/static/media/weather-icon.dbae7ffb4626cd37b633.png",
+    "static/media/trash.png": "/rajeshport/static/media/trash.ddf5ff0a606fa0b72657.png",
+    "static/media/notes-icon.png": "/rajeshport/static/media/notes-icon.7784c2a0dcf34c073df2.png",
+    "static/media/music-icon.png": "/rajeshport/static/media/music-icon.65c26738fd6321a3b976.png",
+    "static/media/calculator-icon.png": "/rajeshport/static/media/calculator-icon.d682755638726430eaa1.png",
+    "static/media/vscode-icon.png": "/rajeshport/static/media/vscode-icon.407d2e60188dee45ccc7.png",
+    "static/media/message.png": "/rajeshport/static/media/message.65406ed2cde30228ecc9.png",
+    "static/media/BG.png": "/rajeshport/static/media/BG.c51b68d487df22a489e4.png",
+    "static/media/launchpad.webp": "/rajeshport/static/media/launchpad.402d48221ce7387d3b21.webp",
+    "static/media/botpipe.png": "/rajeshport/static/media/botpipe.657ccfbbcec6532f4951.png",
+    "static/media/toppipe.png": "/rajeshport/static/media/toppipe.28fdc13d83f4182e1fa3.png",
+    "static/media/ground.png": "/rajeshport/static/media/ground.226c164f792cb252c595.png",
+    "static/media/flappybird.png": "/rajeshport/static/media/flappybird.bdf93cc60b2d6d4beb03.png",
+    "static/media/appstore.webp": "/rajeshport/static/media/appstore.abe2d60090c776232dc7.webp",
+    "static/media/hataridai.avif": "/rajeshport/static/media/hataridai.a119ebc37f874c84aac6.avif",
+    "index.html": "/rajeshport/index.html",
+    "main.8da3fa10.css.map": "/rajeshport/static/css/main.8da3fa10.css.map",
+    "main.ee6508f1.js.map": "/rajeshport/static/js/main.ee6508f1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8da3fa10.css",
+    "static/js/main.ee6508f1.js"
+  ]
+}
