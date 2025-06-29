@@ -8,7 +8,9 @@ const BootScreen = ({ fadeOut, showStartButton, onStart, showProgressBar }) => {
   useEffect(() => {
     // Create audio element for startup sound
     if (showProgressBar && !audioRef.current) {
-      audioRef.current = new Audio("/StartupIntelT2Mac.wav");
+      audioRef.current = new Audio(
+        process.env.PUBLIC_URL + "/StartupIntelT2Mac.wav"
+      );
       audioRef.current.volume = 0.7; // Set volume to 70%
 
       // Play startup sound when boot sequence starts
