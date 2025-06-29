@@ -1,0 +1,95 @@
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 90px;
+  padding: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: transform 0.1s ease-in-out, background-color 0.2s ease;
+}
+
+.icon-container {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.1s ease-in-out;
+}
+
+/* Special styling for PNG icons (like trash and message) */
+.icon-container img {
+  border-radius: 0;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Styling for emoji and gradient icons */
+.icon-container div {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.desktop-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.desktop-icon:hover .icon-container {
+  transform: scale(1.05);
+}
+
+.desktop-icon:active {
+  transform: scale(0.95);
+  transition-duration: 0.05s;
+}
+
+.desktop-icon.selected {
+  background-color: rgba(0, 122, 255, 0.25);
+  border: 1px solid rgba(0, 122, 255, 0.5);
+}
+
+.icon-label {
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  padding: 2px 5px;
+  border-radius: 4px;
+  max-width: 100%;
+  word-break: break-all;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* When an icon is selected, its label also gets a highlight */
+.desktop-icon.selected .icon-label {
+  background-color: #007aff;
+  color: white;
+  text-shadow: none;
+}
+
+/* --- Animation for when icons first appear on the desktop --- */
+@keyframes iconAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.desktop-icon {
+  animation: iconAppear 0.3s ease-out;
+}

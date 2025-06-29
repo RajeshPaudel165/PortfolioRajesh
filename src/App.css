@@ -1,0 +1,265 @@
+/* src/App.css */
+
+/* CSS Variables for theming */
+:root {
+  /* Dark mode variables (default) */
+  --bg-primary: #1c1c1e;
+  --bg-secondary: #2e2e2e;
+  --bg-tertiary: #3c3c3c;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --accent-color: #007aff;
+  --hover-bg: rgba(0, 122, 255, 0.2);
+}
+
+/* Light mode variables */
+.light-mode {
+  --bg-primary: #f5f5f7;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f0f0;
+  --text-primary: #1d1d1f;
+  --text-secondary: #424245;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #007aff;
+  --hover-bg: rgba(0, 122, 255, 0.1);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.desktop {
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.desktop-icon {
+  width: 90px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.desktop-icon:hover,
+.desktop-icon.selected {
+  background-color: var(--hover-bg);
+}
+
+.icon-label {
+  color: var(--text-primary);
+  font-size: 13px;
+  text-shadow: 1px 1px 2px var(--shadow-color);
+  text-align: center;
+}
+
+/* --- Window Styles --- */
+.app-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.app-window.inactive {
+  opacity: 0.85;
+}
+.window-header {
+  height: 40px;
+  background-color: var(--bg-tertiary);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: grab;
+}
+.window-header:active {
+  cursor: grabbing;
+}
+.window-title {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.window-controls {
+  position: absolute;
+  left: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.control-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+.control-button::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: transparent; /* Makes the hitbox invisible */
+}
+
+.control-button.close {
+  background-color: #ff5f57;
+}
+.control-button.minimize {
+  background-color: #febc2e;
+}
+
+.control-button.close {
+  background-color: #ff5f57;
+}
+.window-content {
+  flex-grow: 1;
+  position: relative;
+  overflow: auto;
+  padding: 20px;
+  color: var(--text-primary);
+}
+
+/* Mobile Warning Overlay */
+.mobile-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.mobile-warning-content {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  margin: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-warning-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.mobile-warning h2 {
+  color: #333;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.mobile-warning p {
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.mobile-warning-button {
+  background: #007aff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s;
+}
+
+.mobile-warning-button:hover {
+  background: #0056cc;
+}
+
+/* Responsive Design for iPad and larger devices */
+@media (min-width: 768px) {
+  .App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .desktop {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .dock {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+}
+
+/* Ensure proper scaling on larger screens */
+@media (min-width: 1024px) {
+  .App {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* Dark mode for mobile warning */
+.dark-mode .mobile-warning-content {
+  background: rgba(30, 30, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .mobile-warning h2 {
+  color: #fff;
+}
+
+.dark-mode .mobile-warning p {
+  color: #ccc;
+}

@@ -1,0 +1,68 @@
+/* Desktop Container */
+.desktop {
+  /* This 'grow' property is key to making the desktop fill available space */
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden; /* Hide anything that goes outside the desktop area */
+}
+
+/* Container for all the icons on the desktop */
+.desktop-icons {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual Desktop Icon Styles */
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 90px;
+  padding: 10px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Style for when an icon is hovered or selected */
+.desktop-icon:hover,
+.desktop-icon.selected {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.icon-image-container {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-label {
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  max-width: 100%;
+  /* Handle long file names */
+  word-break: break-all;
+}
+
+/* Add these to your Skills.css file */
+
+.skill-icon.vscode {
+  color: #007acc;
+}
+.skill-icon.figma {
+  color: #f24e1e;
+}

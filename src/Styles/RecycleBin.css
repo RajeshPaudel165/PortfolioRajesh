@@ -1,0 +1,426 @@
+.recycle-bin {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.recycle-bin.drag-over {
+  background-color: #2a2a2a;
+  border: 2px dashed #007aff;
+  border-radius: 8px;
+}
+
+.recycle-bin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+  background-color: #2a2a2a;
+}
+
+.recycle-bin-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trash-icon {
+  font-size: 24px;
+}
+
+.recycle-bin-title h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.recycle-bin-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #404040;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover:not(:disabled) {
+  background-color: #505050;
+}
+
+.action-btn.active {
+  background-color: #007aff;
+}
+
+.action-btn.danger {
+  background-color: #ff3b30;
+}
+
+.action-btn.danger:hover:not(:disabled) {
+  background-color: #ff453a;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.recycle-bin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: #252525;
+  border-bottom: 1px solid #333;
+}
+
+.view-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.view-btn {
+  padding: 6px 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.view-btn:hover {
+  background-color: #404040;
+}
+
+.view-btn.active {
+  background-color: #007aff;
+}
+
+.select-all-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #007aff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.select-all-btn:hover {
+  background-color: rgba(0, 122, 255, 0.1);
+}
+
+.recycle-bin-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.empty-trash {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #888;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-trash p {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.empty-trash span {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.items-container.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.item:hover {
+  background-color: #2a2a2a;
+  border-color: #404040;
+}
+
+.item.selected {
+  background-color: rgba(0, 122, 255, 0.1);
+  border-color: #007aff;
+}
+
+.item:active {
+  transform: scale(0.98);
+}
+
+.item-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-meta {
+  font-size: 12px;
+  color: #888;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.item-checkbox {
+  flex-shrink: 0;
+}
+
+.item-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #007aff;
+}
+
+/* Grid view specific styles */
+.items-container.grid .item {
+  flex-direction: column;
+  text-align: center;
+  padding: 16px;
+}
+
+.items-container.grid .item-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.items-container.grid .item-details {
+  width: 100%;
+}
+
+.items-container.grid .item-name {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.items-container.grid .item-meta {
+  font-size: 11px;
+  justify-content: center;
+}
+
+.items-container.grid .item-checkbox {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.recycle-bin-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #333;
+  background-color: #252525;
+}
+
+.trash-info {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #888;
+  align-items: center;
+}
+
+/* Preview Modal */
+.preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.preview-content {
+  background-color: #2a2a2a;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  border: 1px solid #333;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #333;
+  background-color: #252525;
+}
+
+.preview-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.close-preview {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.close-preview:hover {
+  background-color: #404040;
+  color: #ffffff;
+}
+
+.preview-body {
+  padding: 20px;
+}
+
+.preview-icon {
+  font-size: 64px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.preview-details {
+  margin-bottom: 20px;
+}
+
+.preview-details p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.preview-details strong {
+  color: #ffffff;
+}
+
+.preview-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* Scrollbar styling */
+.recycle-bin-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.recycle-bin-content::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+.recycle-bin-content::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 4px;
+}
+
+.recycle-bin-content::-webkit-scrollbar-thumb:hover {
+  background: #505050;
+}
+
+/* Drag and drop animations */
+@keyframes dragPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.recycle-bin.drag-over {
+  animation: dragPulse 1s infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .recycle-bin-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .recycle-bin-actions {
+    justify-content: center;
+  }
+
+  .items-container.grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .preview-content {
+    width: 95%;
+    margin: 20px;
+  }
+}

@@ -1,0 +1,666 @@
+.music-player {
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Helvetica Neue", sans-serif;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.music-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 24px 0 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #333333;
+}
+
+.music-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.music-controls-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: #86868b;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-btn:hover {
+  background-color: #1c1c1e;
+  color: #ffffff;
+}
+
+.control-btn.active {
+  color: #1db954;
+}
+
+.control-btn.large {
+  padding: 12px;
+}
+
+.spotify-login-btn {
+  background-color: #1db954;
+  color: #000000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", sans-serif;
+}
+
+.spotify-login-btn:hover {
+  background-color: #1ed760;
+  transform: scale(1.05);
+}
+
+.music-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 24px 24px;
+  flex: 1;
+  gap: 32px;
+}
+
+.music-search {
+  margin: 0 24px 24px 24px;
+  width: calc(100% - 48px);
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  background-color: #1c1c1e;
+  border-radius: 8px;
+  border: 1px solid #333333;
+  padding: 12px 16px;
+  gap: 12px;
+}
+
+.search-input svg {
+  color: #86868b;
+  flex-shrink: 0;
+}
+
+.search-input input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", sans-serif;
+}
+
+.search-input input::placeholder {
+  color: #86868b;
+}
+
+.search-input button {
+  background-color: #1db954;
+  color: #000000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", sans-serif;
+}
+
+.search-input button:hover:not(:disabled) {
+  background-color: #1ed760;
+}
+
+.search-input button:disabled {
+  background-color: #333333;
+  color: #86868b;
+  cursor: not-allowed;
+}
+
+.search-results {
+  margin: 0 24px 24px 24px;
+}
+
+.search-results h4 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.search-tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-track {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #1c1c1e;
+  border-radius: 8px;
+  border: 1px solid #333333;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.search-track:hover {
+  background-color: #2c2c2e;
+  border-color: #1db954;
+}
+
+.search-track .track-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.search-track .track-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.search-track .track-name {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.search-track .track-artist-small {
+  color: #86868b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.add-track-btn {
+  background-color: #1db954;
+  color: #000000;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.add-track-btn:hover {
+  background-color: #1ed760;
+  transform: scale(1.1);
+}
+
+.music-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #86868b;
+}
+
+.music-loading .loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #333333;
+  border-top: 3px solid #1db954;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.music-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #86868b;
+  text-align: center;
+  padding: 24px;
+}
+
+.music-error p {
+  margin: 8px 0 16px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.music-error button {
+  background-color: #1db954;
+  color: #000000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", sans-serif;
+}
+
+.music-error button:hover {
+  background-color: #1ed760;
+}
+
+.music-error-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff3b30;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(255, 59, 48, 0.3);
+  z-index: 1000;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateX(-50%) translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+.music-error-banner button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.music-error-banner button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.album-art {
+  width: 280px;
+  height: 280px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.album-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.track-info {
+  text-align: left;
+  margin-bottom: 32px;
+  max-width: 300px;
+  flex: 1;
+}
+
+.track-title {
+  margin: 0 0 8px 0;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.track-artist {
+  margin: 0 0 4px 0;
+  color: #86868b;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.track-album {
+  margin: 0;
+  color: #86868b;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.progress-container {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #333333;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #1db954;
+  border-radius: 2px;
+  transition: width 0.1s ease;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #86868b;
+  font-weight: 500;
+}
+
+.main-controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #1db954;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(29, 185, 84, 0.3);
+}
+
+.play-btn:hover {
+  background-color: #1ed760;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  color: #86868b;
+}
+
+.volume-slider {
+  width: 120px;
+  height: 4px;
+  background-color: #333333;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background-color: #1db954;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  color: #86868b;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  margin-bottom: 24px;
+}
+
+.like-btn:hover {
+  color: #ff3b30;
+  background-color: rgba(255, 59, 48, 0.1);
+}
+
+.like-btn.liked {
+  color: #ff3b30;
+}
+
+.playlist {
+  flex: 1;
+  overflow: hidden;
+  margin: 0 24px 24px 24px;
+  max-height: 200px;
+}
+
+.playlist h4 {
+  margin: 0 0 16px 0;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.playlist-tracks {
+  overflow-y: auto;
+  max-height: 150px;
+}
+
+.playlist-track {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 4px;
+}
+
+.playlist-track:hover {
+  background-color: #1c1c1e;
+}
+
+.playlist-track.active {
+  background-color: #1db954;
+  color: #000000;
+}
+
+.track-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  margin-right: 16px;
+  object-fit: cover;
+}
+
+.track-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.track-artist-small {
+  font-size: 12px;
+  color: #86868b;
+  font-weight: 400;
+}
+
+.track-duration {
+  font-size: 12px;
+  color: #86868b;
+  margin-left: 12px;
+  font-weight: 500;
+}
+
+.playlist-track.active .track-name {
+  color: #000000;
+  font-weight: 700;
+}
+
+.playlist-track.active .track-artist-small,
+.playlist-track.active .track-duration {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* Light mode adjustments */
+.light-mode .music-player {
+  background-color: #ffffff;
+}
+
+.light-mode .music-header {
+  border-bottom-color: #e5e5e7;
+}
+
+.light-mode .music-header h2 {
+  color: #1d1d1f;
+}
+
+.light-mode .control-btn {
+  color: #86868b;
+}
+
+.light-mode .control-btn:hover {
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.light-mode .track-title {
+  color: #1d1d1f;
+}
+
+.light-mode .track-artist,
+.light-mode .track-album {
+  color: #86868b;
+}
+
+.light-mode .progress-bar {
+  background-color: #e5e5e7;
+}
+
+.light-mode .volume-control {
+  color: #86868b;
+}
+
+.light-mode .volume-slider {
+  background-color: #e5e5e7;
+}
+
+.light-mode .like-btn {
+  color: #86868b;
+}
+
+.light-mode .playlist h4 {
+  color: #1d1d1f;
+}
+
+.light-mode .playlist-track:hover {
+  background-color: #f5f5f7;
+}
+
+.light-mode .playlist-track.active {
+  background-color: #1db954;
+}
+
+.light-mode .track-name {
+  color: #1d1d1f;
+}
+
+.light-mode .track-artist-small,
+.light-mode .track-duration {
+  color: #86868b;
+}
+
+.light-mode .playlist-track.active .track-name {
+  color: #000000;
+}
+
+.light-mode .playlist-track.active .track-artist-small,
+.light-mode .playlist-track.active .track-duration {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.player-controls-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
+}
