@@ -1,5 +1,17 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import "../Styles/Weather.css";
+import {
+  FaSun,
+  FaCloud,
+  FaCloudRain,
+  FaSnowflake,
+  FaBolt,
+  FaSmog,
+  FaMapMarkerAlt,
+  FaSearch,
+  FaExclamationTriangle,
+  FaRedo,
+} from "react-icons/fa";
 
 const Weather = ({ darkMode }) => {
   const [weather, setWeather] = useState(null);
@@ -203,69 +215,64 @@ const Weather = ({ darkMode }) => {
         windSpeed: Math.floor(Math.random() * 15) + 5,
         feelsLike: Math.floor(Math.random() * 30) + 50,
         high: Math.floor(Math.random() * 30) + 60,
-        low: Math.floor(Math.random() * 30) + 40,
+        low: Math.floor(Math.random() * 30) + 30,
         pressure: Math.floor(Math.random() * 50) + 1000,
         visibility: Math.floor(Math.random() * 5) + 8,
         icon: "clear",
-        sunrise: new Date(new Date().setHours(6, 30, 0, 0)),
-        sunset: new Date(new Date().setHours(19, 30, 0, 0)),
+        sunrise: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate(),
+          6,
+          30
+        ),
+        sunset: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate(),
+          19,
+          30
+        ),
       };
+
       setWeather(mockWeatherData);
-      setLocation(city);
+      setLoading(false);
     } catch (err) {
-      setError(err.message || "Failed to load weather data");
-      console.error("Weather API error:", err);
-    } finally {
+      console.error("Error fetching weather by city:", err);
+      setError("Failed to load weather data");
       setLoading(false);
     }
   }, []);
 
+  // Get user location on component mount
   useEffect(() => {
-    // Try to get user's location on component mount
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const coords = {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          };
-          setUserLocation(coords);
-          fetchLocationAndWeather(coords.lat, coords.lon);
+          const { latitude: lat, longitude: lon } = position.coords;
+          setUserLocation({ lat, lon });
+          fetchLocationAndWeather(lat, lon);
         },
-        (error) => {
-          console.log("Geolocation error:", error);
-          // Fallback to default location
+        (err) => {
+          console.error("Geolocation error:", err);
           fetchWeatherByCity(location);
         }
       );
     } else {
       fetchWeatherByCity(location);
     }
-  }, [
-    location,
-    fetchLocationAndWeather,
-    fetchWeatherByCity,
-    GOOGLE_MAPS_API_KEY,
-  ]);
+  }, []);
 
   const searchLocation = async (query) => {
-    if (!GOOGLE_MAPS_API_KEY) {
-      console.error("Google Maps API key not provided for search");
-      setError(
-        "Google Maps API key not provided. Please check your environment configuration."
-      );
-      return;
-    }
-
     setLoading(true);
     setError(null);
 
     try {
-      console.log(
-        "Searching location with API key:",
-        GOOGLE_MAPS_API_KEY.substring(0, 10) + "..."
-      );
+      if (!GOOGLE_MAPS_API_KEY) {
+        throw new Error("Google Maps API key not provided");
+      }
 
+      // Search for location using Google Maps Geocoding API
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
           query
@@ -288,14 +295,10 @@ const Weather = ({ darkMode }) => {
 
       if (data.results && data.results.length > 0) {
         const result = data.results[0];
-        const coords = result.geometry.location;
+        const { lat, lng } = result.geometry.location;
 
-        setUserLocation({
-          lat: coords.lat,
-          lon: coords.lng,
-        });
-
-        await fetchLocationAndWeather(coords.lat, coords.lng);
+        setLocation(query);
+        await fetchLocationAndWeather(lat, lng);
       } else {
         setError("Location not found");
         setLoading(false);
@@ -327,26 +330,26 @@ const Weather = ({ darkMode }) => {
     const conditionLower = condition.toLowerCase();
 
     if (conditionLower.includes("clear")) {
-      return <span style={{ fontSize: "48px" }}>☀️</span>;
+      return <FaSun size={48} />;
     } else if (conditionLower.includes("clouds")) {
-      return <span style={{ fontSize: "48px" }}>☁️</span>;
+      return <FaCloud size={48} />;
     } else if (
       conditionLower.includes("rain") ||
       conditionLower.includes("drizzle")
     ) {
-      return <span style={{ fontSize: "48px" }}>🌧️</span>;
+      return <FaCloudRain size={48} />;
     } else if (conditionLower.includes("snow")) {
-      return <span style={{ fontSize: "48px" }}>❄️</span>;
+      return <FaSnowflake size={48} />;
     } else if (conditionLower.includes("thunder")) {
-      return <span style={{ fontSize: "48px" }}>⚡</span>;
+      return <FaBolt size={48} />;
     } else if (
       conditionLower.includes("mist") ||
       conditionLower.includes("fog") ||
       conditionLower.includes("haze")
     ) {
-      return <span style={{ fontSize: "48px" }}>🌫️</span>;
+      return <FaSmog size={48} />;
     } else {
-      return <span style={{ fontSize: "48px" }}>☀️</span>;
+      return <FaSun size={48} />;
     }
   };
 
@@ -381,7 +384,7 @@ const Weather = ({ darkMode }) => {
     return (
       <div className={`weather-app ${darkMode ? "dark-mode" : ""}`}>
         <div className="weather-error">
-          <span style={{ fontSize: "24px", marginBottom: "8px" }}>⚠️</span>
+          <FaExclamationTriangle size={24} style={{ marginBottom: "8px" }} />
           <p>{error}</p>
           <div
             style={{
@@ -426,7 +429,7 @@ const Weather = ({ darkMode }) => {
       <div className="weather-search">
         <form onSubmit={handleSearch}>
           <div className="search-input">
-            <span style={{ fontSize: "16px" }}>📍</span>
+            <FaMapMarkerAlt size={16} />
             <input
               type="text"
               placeholder="Search city or address..."
@@ -434,7 +437,7 @@ const Weather = ({ darkMode }) => {
               onChange={(e) => setSearchInput(e.target.value)}
             />
             <button type="submit">
-              <span style={{ fontSize: "16px" }}>🔍</span>
+              <FaSearch size={16} />
             </button>
           </div>
         </form>
@@ -493,7 +496,7 @@ const Weather = ({ darkMode }) => {
       <div className="weather-footer">
         <p>Powered by Google Maps API</p>
         <button className="refresh-btn" onClick={handleRefresh}>
-          <span style={{ fontSize: "16px", marginRight: "8px" }}>🔄</span>
+          <FaRedo size={16} style={{ marginRight: "8px" }} />
           Refresh
         </button>
       </div>

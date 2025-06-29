@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import "../Styles/Messages.css";
+import {
+  FaComments,
+  FaEnvelope,
+  FaPaperPlane,
+  FaTrash,
+  FaInbox,
+} from "react-icons/fa";
 
 const Messages = ({ darkMode }) => {
   const [messages, setMessages] = useState([]);
@@ -122,7 +129,9 @@ const Messages = ({ darkMode }) => {
     <div className={`messages-app ${darkMode ? "dark-mode" : ""}`}>
       <div className="messages-header">
         <div className="messages-title">
-          <div className="messages-icon">💬</div>
+          <div className="messages-icon">
+            <FaComments size={24} />
+          </div>
           <h1>Messages</h1>
         </div>
         <div className="messages-stats">
@@ -145,7 +154,10 @@ const Messages = ({ darkMode }) => {
             <h3>New Message</h3>
             {!EMAILJS_SERVICE_ID && (
               <div className="emailjs-notice">
-                <p>📧 EmailJS not configured. Messages will be simulated.</p>
+                <p>
+                  <FaEnvelope size={16} /> EmailJS not configured. Messages will
+                  be simulated.
+                </p>
                 <p>
                   To enable real email sending, add your EmailJS credentials to
                   environment variables.
@@ -209,7 +221,7 @@ const Messages = ({ darkMode }) => {
 
               {sentSuccess && (
                 <div className="success-message">
-                  Message sent successfully! 📧
+                  Message sent successfully! <FaEnvelope size={16} />
                 </div>
               )}
 
@@ -221,7 +233,9 @@ const Messages = ({ darkMode }) => {
                   </>
                 ) : (
                   <>
-                    <span className="send-icon">📤</span>
+                    <span className="send-icon">
+                      <FaPaperPlane size={16} />
+                    </span>
                     Send Message
                   </>
                 )}
@@ -252,7 +266,7 @@ const Messages = ({ darkMode }) => {
                           onClick={() => deleteMessage(message.id)}
                           title="Delete message"
                         >
-                          🗑️
+                          <FaTrash size={16} />
                         </button>
                       </div>
                     </div>
@@ -268,7 +282,9 @@ const Messages = ({ darkMode }) => {
               </div>
             ) : (
               <div className="empty-messages">
-                <div className="empty-icon">📭</div>
+                <div className="empty-icon">
+                  <FaInbox size={48} />
+                </div>
                 <h3>No messages yet</h3>
                 <p>Send your first message using the form on the left.</p>
               </div>
@@ -280,7 +296,9 @@ const Messages = ({ darkMode }) => {
       <div className="messages-footer">
         <p>Messages are stored locally and sent via EmailJS integration</p>
         <div className="contact-info">
-          <span>📧 rajesh.paudel@example.com</span>
+          <span>
+            <FaEnvelope size={16} /> rajesh.paudel@example.com
+          </span>
           <span>📱 +1 (555) 123-4567</span>
         </div>
       </div>

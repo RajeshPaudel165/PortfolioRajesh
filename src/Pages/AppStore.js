@@ -1,5 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/AppStore.css";
+import {
+  FaStore,
+  FaSearch,
+  FaStar,
+  FaCalculator,
+  FaCheck,
+  FaMusic,
+  FaCode,
+  FaGlobe,
+  FaCamera,
+  FaUsers,
+  FaPuzzlePiece,
+  FaBolt,
+  FaWrench,
+  FaGraduationCap,
+  FaGamepad,
+  FaMobile,
+  FaLaptop,
+  FaClock,
+} from "react-icons/fa";
 
 const AppStore = ({ darkMode, onAppInstalled }) => {
   const [selectedCategory, setSelectedCategory] = useState("featured");
@@ -9,14 +29,14 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
   const [selectedApp, setSelectedApp] = useState(null);
 
   const categories = [
-    { id: "featured", name: "Featured", icon: "⭐" },
-    { id: "productivity", name: "Productivity", icon: "⚡" },
-    { id: "entertainment", name: "Entertainment", icon: "🎮" },
-    { id: "utilities", name: "Utilities", icon: "🔧" },
-    { id: "education", name: "Education", icon: "📚" },
-    { id: "games", name: "Games", icon: "🎯" },
-    { id: "social", name: "Social Networking", icon: "👥" },
-    { id: "photo", name: "Photo & Video", icon: "📷" },
+    { id: "featured", name: "Featured", icon: <FaStar /> },
+    { id: "productivity", name: "Productivity", icon: <FaBolt /> },
+    { id: "entertainment", name: "Entertainment", icon: <FaMusic /> },
+    { id: "utilities", name: "Utilities", icon: <FaWrench /> },
+    { id: "education", name: "Education", icon: <FaGraduationCap /> },
+    { id: "games", name: "Games", icon: <FaGamepad /> },
+    { id: "social", name: "Social Networking", icon: <FaUsers /> },
+    { id: "photo", name: "Photo & Video", icon: <FaCamera /> },
   ];
 
   const apps = [
@@ -28,7 +48,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       rating: 4.8,
       reviews: 1247,
       price: "$4.99",
-      icon: "🧮",
+      icon: <FaCalculator />,
       description:
         "Advanced calculator with scientific functions, graphing capabilities, and unit conversions. Perfect for students, engineers, and professionals.",
       screenshots: ["📱", "📱", "📱", "📱"],
@@ -51,7 +71,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       rating: 4.6,
       reviews: 892,
       price: "Free",
-      icon: "✅",
+      icon: <FaCheck />,
       description:
         "Organize your tasks and boost productivity with smart reminders and project management. Sync across all your devices.",
       screenshots: ["📱", "📱", "📱", "📱"],
@@ -74,7 +94,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       rating: 4.9,
       reviews: 2156,
       price: "$12.99",
-      icon: "🎵",
+      icon: <FaMusic />,
       description:
         "Professional music creation and editing with virtual instruments and effects. Create, record, and produce your own music.",
       screenshots: ["📱", "📱", "📱", "📱"],
@@ -97,7 +117,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       rating: 4.7,
       reviews: 1567,
       price: "$9.99",
-      icon: "💻",
+      icon: <FaCode />,
       description:
         "Advanced code editor with syntax highlighting, debugging, and Git integration. Support for 50+ programming languages.",
       screenshots: ["📱", "📱", "📱", "📱"],
@@ -120,7 +140,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       rating: 4.5,
       reviews: 743,
       price: "Free",
-      icon: "🌍",
+      icon: <FaGlobe />,
       description:
         "Learn new languages with interactive lessons, speech recognition, and progress tracking. Available in 20+ languages.",
       screenshots: ["📱", "📱", "📱", "📱"],
@@ -143,7 +163,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       rating: 4.4,
       reviews: 1892,
       price: "$7.99",
-      icon: "📷",
+      icon: <FaCamera />,
       description:
         "Professional photo editing and filters with AI-powered enhancement tools. Perfect for photographers and designers.",
       screenshots: ["📱", "📱", "📱", "📱"],
@@ -166,7 +186,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       rating: 4.3,
       reviews: 3421,
       price: "Free",
-      icon: "👥",
+      icon: <FaUsers />,
       description:
         "Connect with friends and family through messaging, video calls, and social networking features.",
       screenshots: ["📱", "📱", "📱", "📱"],
@@ -189,7 +209,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       rating: 4.6,
       reviews: 892,
       price: "$2.99",
-      icon: "🧩",
+      icon: <FaPuzzlePiece />,
       description:
         "Challenge your mind with hundreds of puzzles, brain teasers, and logic games. Perfect for all ages.",
       screenshots: ["📱", "📱", "📱", "📱"],
@@ -236,16 +256,16 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
     const hasHalfStar = rating % 1 !== 0;
 
     for (let i = 0; i < fullStars; i++) {
-      stars.push("★");
+      stars.push(<FaStar key={i} style={{ color: "#FFD700" }} />);
     }
     if (hasHalfStar) {
-      stars.push("★");
+      stars.push(<FaStar key="half" style={{ color: "#FFD700" }} />);
     }
     const emptyStars = 5 - Math.ceil(rating);
     for (let i = 0; i < emptyStars; i++) {
-      stars.push("☆");
+      stars.push(<FaStar key={`empty-${i}`} style={{ color: "#E0E0E0" }} />);
     }
-    return stars.join("");
+    return stars;
   };
 
   const isAppInstalled = (appId) => {
@@ -335,14 +355,18 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       <div className="app-store-navbar">
         <div className="navbar-left">
           <div className="store-logo">
-            <span className="store-icon">🛍️</span>
+            <span className="store-icon">
+              <FaStore />
+            </span>
             <span className="store-text">App Store</span>
           </div>
         </div>
 
         <div className="navbar-center">
           <div className="search-container">
-            <div className="search-icon">🔍</div>
+            <div className="search-icon">
+              <FaSearch />
+            </div>
             <input
               type="text"
               placeholder="Search the App Store"
@@ -380,15 +404,21 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
           <div className="sidebar-section">
             <h3 className="sidebar-title">Quick Links</h3>
             <button className="sidebar-item">
-              <span className="sidebar-icon">📱</span>
+              <span className="sidebar-icon">
+                <FaMobile />
+              </span>
               <span className="sidebar-label">iPhone Apps</span>
             </button>
             <button className="sidebar-item">
-              <span className="sidebar-icon">💻</span>
+              <span className="sidebar-icon">
+                <FaLaptop />
+              </span>
               <span className="sidebar-label">Mac Apps</span>
             </button>
             <button className="sidebar-item">
-              <span className="sidebar-icon">⌚</span>
+              <span className="sidebar-icon">
+                <FaClock />
+              </span>
               <span className="sidebar-label">Apple Watch</span>
             </button>
           </div>

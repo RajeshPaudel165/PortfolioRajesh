@@ -1,5 +1,12 @@
 import React from "react";
 import "../Styles/Education.css";
+import {
+  FaGraduationCap,
+  FaTrophy,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaStar,
+} from "react-icons/fa";
 
 const Education = ({ darkMode }) => {
   const educationData = [
@@ -16,7 +23,7 @@ const Education = ({ darkMode }) => {
         "Dean's List",
         "Academic Excellence Award",
       ],
-      icon: <span style={{ fontSize: "24px" }}>🎓</span>,
+      icon: <FaGraduationCap size={24} />,
       isCurrent: true,
     },
     {
@@ -32,7 +39,7 @@ const Education = ({ darkMode }) => {
         "Nepal Topper Management 2023",
         "Academic Excellence",
       ],
-      icon: <span style={{ fontSize: "24px" }}>🏆</span>,
+      icon: <FaTrophy size={24} />,
       isCurrent: false,
     },
   ];
@@ -65,15 +72,15 @@ const Education = ({ darkMode }) => {
 
               <div className="education-meta">
                 <div className="meta-item">
-                  <span style={{ fontSize: "16px" }}>📅</span>
+                  <FaCalendarAlt size={16} />
                   <span>{education.period}</span>
                 </div>
                 <div className="meta-item">
-                  <span style={{ fontSize: "16px" }}>📍</span>
+                  <FaMapMarkerAlt size={16} />
                   <span>{education.location}</span>
                 </div>
                 <div className="meta-item gpa">
-                  <span style={{ fontSize: "16px" }}>🌟</span>
+                  <FaStar size={16} />
                   <span>GPA: {education.gpa}</span>
                 </div>
               </div>

@@ -9,6 +9,50 @@
   transition: all 0.3s ease;
 }
 
+/* Icon Styles */
+.app-store svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.store-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.search-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sidebar-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.app-icon-large svg {
+  width: 80px;
+  height: 80px;
+}
+
+.modal-app-icon svg {
+  width: 120px;
+  height: 120px;
+}
+
+.rating-stars svg {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+}
+
+.modal-stars svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+}
+
 /* Light Mode (Default) */
 .app-store.light-mode {
   background-color: #ffffff;

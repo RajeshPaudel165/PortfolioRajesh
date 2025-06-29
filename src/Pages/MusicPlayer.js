@@ -1,5 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../Styles/MusicPlayer.css";
+import {
+  FaRandom,
+  FaRedo,
+  FaStepBackward,
+  FaStepForward,
+  FaPlay,
+  FaPause,
+  FaVolumeUp,
+  FaHeart,
+} from "react-icons/fa";
 
 // Import images
 import hataridaiImage from "../assets/hataridai.avif";
@@ -152,14 +162,14 @@ const MusicPlayer = ({ darkMode }) => {
             onClick={toggleShuffle}
             title="Shuffle"
           >
-            {isShuffled ? "🔀" : "🔀"}
+            <FaRandom size={18} />
           </button>
           <button
             className={`control-btn ${isLooped ? "active" : ""}`}
             onClick={toggleLoop}
             title="Repeat"
           >
-            {isLooped ? "🔁" : "🔁"}
+            <FaRedo size={18} />
           </button>
         </div>
       </div>
@@ -194,18 +204,18 @@ const MusicPlayer = ({ darkMode }) => {
 
           <div className="main-controls">
             <button className="control-btn large" onClick={previousTrack}>
-              {"◀"}
+              <FaStepBackward size={20} />
             </button>
             <button className="play-btn" onClick={togglePlay}>
-              {isPlaying ? "⏸" : "▶"}
+              {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
             </button>
             <button className="control-btn large" onClick={nextTrack}>
-              {"▶"}
+              <FaStepForward size={20} />
             </button>
           </div>
 
           <div className="volume-control">
-            {"🔉"}
+            <FaVolumeUp size={16} />
             <input
               type="range"
               min="0"
@@ -221,7 +231,7 @@ const MusicPlayer = ({ darkMode }) => {
             className={`like-btn ${isLiked ? "liked" : ""}`}
             onClick={toggleLike}
           >
-            {isLiked ? "❤" : "❤"}
+            <FaHeart size={18} />
           </button>
         </div>
       </div>

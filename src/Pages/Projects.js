@@ -1,5 +1,15 @@
 import React, { useState } from "react";
 import "../Styles/Projects.css";
+import {
+  FaBriefcase,
+  FaGamepad,
+  FaBus,
+  FaGraduationCap,
+  FaHospital,
+  FaFolder,
+  FaGlobe,
+  FaFolderOpen,
+} from "react-icons/fa";
 
 const Projects = ({ darkMode }) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -14,7 +24,7 @@ const Projects = ({ darkMode }) => {
       technologies: ["Python", "Pygame"],
       github: "https://github.com/RajeshPaudel165/Pygame",
       live: null,
-      image: "🎮",
+      image: <FaGamepad size={32} />,
       features: [
         "Progressive difficulty system",
         "Sound effects and audio",
@@ -32,13 +42,12 @@ const Projects = ({ darkMode }) => {
       technologies: ["Node.js", "Express.js", "MongoDB", "JWT"],
       github: "https://github.com/RajeshPaudel165/Express",
       live: null,
-      image: "🚌",
+      image: <FaBus size={32} />,
       features: [
-        "RESTful API endpoints",
+        "Arduino",
         "User authentication",
         "Real-time tracking",
-        "MongoDB integration",
-        "JWT token system",
+        "Firebase integration",
       ],
     },
     {
@@ -50,7 +59,7 @@ const Projects = ({ darkMode }) => {
       technologies: ["HTML", "CSS", "JavaScript"],
       github: null,
       live: "https://auraednepal.org",
-      image: "🎓",
+      image: <FaGraduationCap size={32} />,
       features: [
         "Educational resources",
         "Responsive design",
@@ -67,7 +76,7 @@ const Projects = ({ darkMode }) => {
       technologies: ["HTML", "CSS", "JavaScript"],
       github: null,
       live: "https://cihs.edu.np",
-      image: "🏥",
+      image: <FaHospital size={32} />,
       features: [
         "Institutional information",
         "Program details",
@@ -100,7 +109,9 @@ const Projects = ({ darkMode }) => {
     <div className={`projects-app ${darkMode ? "dark-mode" : "light-mode"}`}>
       <div className="projects-header">
         <div className="projects-title">
-          <div className="projects-icon">💼</div>
+          <div className="projects-icon">
+            <FaBriefcase size={24} />
+          </div>
           <h1>Projects</h1>
         </div>
         <div className="projects-stats">
@@ -181,7 +192,9 @@ const Projects = ({ darkMode }) => {
                     rel="noopener noreferrer"
                     className="project-link github"
                   >
-                    <span className="link-icon">📁</span>
+                    <span className="link-icon">
+                      <FaFolder size={16} />
+                    </span>
                     GitHub
                   </a>
                 )}
@@ -192,7 +205,9 @@ const Projects = ({ darkMode }) => {
                     rel="noopener noreferrer"
                     className="project-link live"
                   >
-                    <span className="link-icon">🌐</span>
+                    <span className="link-icon">
+                      <FaGlobe size={16} />
+                    </span>
                     Live Demo
                   </a>
                 )}
@@ -203,7 +218,9 @@ const Projects = ({ darkMode }) => {
 
         {filteredProjects.length === 0 && (
           <div className="empty-state">
-            <div className="empty-icon">📁</div>
+            <div className="empty-icon">
+              <FaFolderOpen size={48} />
+            </div>
             <h3>No projects found</h3>
             <p>
               Try selecting a different category or check back later for new

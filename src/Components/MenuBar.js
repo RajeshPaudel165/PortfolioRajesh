@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/MenuBar.css";
-import { FaApple, FaWifi, FaSearch } from "react-icons/fa";
-import { BsBatteryFull } from "react-icons/bs";
+import { FaApple, FaWifi } from "react-icons/fa";
+import {
+  BsBatteryFull,
+  BsBatteryHalf,
+  BsBatteryCharging,
+} from "react-icons/bs";
 
 const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isViewMenuOpen, setIsViewMenuOpen] = useState(false);
   const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState(false);
+  const [batteryLevel, setBatteryLevel] = useState(85); // Default battery level
+  const [isCharging] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  // Simulate battery level changes (you can replace this with real battery API)
+  useEffect(() => {
+    const batteryTimer = setInterval(() => {
+      setBatteryLevel((prev) => {
+        if (isCharging) {
+          return Math.min(100, prev + 1);
+        } else {
+          return Math.max(0, prev - 0.5);
+        }
+      });
+    }, 30000); // Update every 30 seconds
+
+    return () => clearInterval(batteryTimer);
+  }, [isCharging]);
 
   const formatTime = (date) =>
     date.toLocaleTimeString("en-US", {
@@ -25,6 +46,16 @@ const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
       month: "short",
       day: "numeric",
     });
+
+  const getBatteryIcon = () => {
+    if (isCharging) {
+      return <BsBatteryCharging size={20} />;
+    } else if (batteryLevel > 50) {
+      return <BsBatteryFull size={20} />;
+    } else {
+      return <BsBatteryHalf size={20} />;
+    }
+  };
 
   return (
     <div className="menu-bar">
@@ -98,14 +129,17 @@ const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
 
       {/* Right Side */}
       <div className="menu-bar-right">
-        <div className="status-icon">
-          <BsBatteryFull size={20} />
+        <div
+          className="status-icon battery-status"
+          title={`${Math.round(batteryLevel)}% ${isCharging ? "Charging" : ""}`}
+        >
+          {getBatteryIcon()}
+          <span className="battery-percentage">
+            {Math.round(batteryLevel)}%
+          </span>
         </div>
         <div className="status-icon">
           <FaWifi size={16} />
-        </div>
-        <div className="status-icon">
-          <FaSearch size={15} />
         </div>
         <div className="date-time">
           <span>{formatDate(currentTime)}</span>

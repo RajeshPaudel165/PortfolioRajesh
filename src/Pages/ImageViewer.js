@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/ImageViewer.css";
+import {
+  FaCamera,
+  FaSearchMinus,
+  FaSearchPlus,
+  FaRedo,
+  FaUndo,
+} from "react-icons/fa";
 
 const ImageViewer = ({ darkMode, imageData, imageName }) => {
   const [zoom, setZoom] = useState(1);
@@ -45,7 +52,9 @@ const ImageViewer = ({ darkMode, imageData, imageName }) => {
     <div className={`image-viewer ${darkMode ? "dark-mode" : ""}`}>
       <div className="image-viewer-header">
         <div className="image-viewer-title">
-          <span className="image-icon">📸</span>
+          <span className="image-icon">
+            <FaCamera size={20} />
+          </span>
           <h2>{imageName}</h2>
         </div>
         <div className="image-viewer-toolbar">
@@ -55,7 +64,7 @@ const ImageViewer = ({ darkMode, imageData, imageName }) => {
             title="Zoom Out"
             disabled={showPlaceholder}
           >
-            🔍➖
+            <FaSearchMinus size={16} />
           </button>
           <button
             className="toolbar-btn"
@@ -63,7 +72,7 @@ const ImageViewer = ({ darkMode, imageData, imageName }) => {
             title="Zoom In"
             disabled={showPlaceholder}
           >
-            🔍➕
+            <FaSearchPlus size={16} />
           </button>
           <button
             className="toolbar-btn"
@@ -71,7 +80,7 @@ const ImageViewer = ({ darkMode, imageData, imageName }) => {
             title="Rotate"
             disabled={showPlaceholder}
           >
-            🔄
+            <FaRedo size={16} />
           </button>
           <button
             className="toolbar-btn"
@@ -79,7 +88,7 @@ const ImageViewer = ({ darkMode, imageData, imageName }) => {
             title="Reset"
             disabled={showPlaceholder}
           >
-            🔄
+            <FaUndo size={16} />
           </button>
         </div>
       </div>
@@ -100,7 +109,9 @@ const ImageViewer = ({ darkMode, imageData, imageName }) => {
           )}
           {showPlaceholder && (
             <div className="image-placeholder">
-              <div className="placeholder-icon">📸</div>
+              <div className="placeholder-icon">
+                <FaCamera size={48} />
+              </div>
               <p>HEIC Image Preview</p>
               <span>{imageName}</span>
               <div className="heic-info">

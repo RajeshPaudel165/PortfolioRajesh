@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/TaskMaster.css";
+import {
+  FaClipboardList,
+  FaPlus,
+  FaEdit,
+  FaTrash,
+  FaCheck,
+} from "react-icons/fa";
 
 const TaskMaster = ({ darkMode }) => {
   const [tasks, setTasks] = useState([]);
@@ -119,7 +126,9 @@ const TaskMaster = ({ darkMode }) => {
     <div className={`taskmaster ${darkMode ? "dark-mode" : "light-mode"}`}>
       <div className="taskmaster-header">
         <div className="taskmaster-title">
-          <div className="taskmaster-icon">📋</div>
+          <div className="taskmaster-icon">
+            <FaClipboardList size={24} />
+          </div>
           <h1>Task Master</h1>
         </div>
         <div className="taskmaster-stats">
@@ -146,7 +155,9 @@ const TaskMaster = ({ darkMode }) => {
               className="task-input"
             />
             <button type="submit" className="add-task-btn">
-              <span className="add-icon">+</span>
+              <span className="add-icon">
+                <FaPlus size={16} />
+              </span>
             </button>
           </div>
         </form>
@@ -177,7 +188,9 @@ const TaskMaster = ({ darkMode }) => {
         <div className="tasks-container">
           {filteredTasks.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">📝</div>
+              <div className="empty-icon">
+                <FaClipboardList size={48} />
+              </div>
               <h3>No tasks found</h3>
               <p>
                 {filter === "all"
@@ -202,7 +215,9 @@ const TaskMaster = ({ darkMode }) => {
                       onClick={() => toggleTask(task.id)}
                     >
                       {task.completed ? (
-                        <span className="checkmark">✓</span>
+                        <span className="checkmark">
+                          <FaCheck size={12} />
+                        </span>
                       ) : (
                         <span className="checkbox"></span>
                       )}
@@ -269,7 +284,7 @@ const TaskMaster = ({ darkMode }) => {
                       onClick={() => startEditing(task)}
                       title="Edit task"
                     >
-                      ✏️
+                      <FaEdit size={16} />
                     </button>
 
                     <button
@@ -277,7 +292,7 @@ const TaskMaster = ({ darkMode }) => {
                       onClick={() => deleteTask(task.id)}
                       title="Delete task"
                     >
-                      🗑️
+                      <FaTrash size={16} />
                     </button>
                   </div>
                 </div>
