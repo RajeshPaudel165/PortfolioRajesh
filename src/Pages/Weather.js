@@ -23,7 +23,7 @@ const Weather = ({ darkMode }) => {
       REACT_APP_GOOGLE_MAPS_API_KEY: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
       NODE_ENV: process.env.NODE_ENV,
     });
-  }, []);
+  }, [GOOGLE_MAPS_API_KEY]);
 
   // Fetch weather data using Google Maps API
   const fetchWeatherData = useCallback(
@@ -244,7 +244,12 @@ const Weather = ({ darkMode }) => {
     } else {
       fetchWeatherByCity(location);
     }
-  }, [location, fetchLocationAndWeather, fetchWeatherByCity]);
+  }, [
+    location,
+    fetchLocationAndWeather,
+    fetchWeatherByCity,
+    GOOGLE_MAPS_API_KEY,
+  ]);
 
   const searchLocation = async (query) => {
     if (!GOOGLE_MAPS_API_KEY) {
