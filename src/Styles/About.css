@@ -1,0 +1,265 @@
+.about-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.18);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: about-fadein 0.3s;
+}
+@keyframes about-fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.about-modal {
+  background: #222;
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  padding: 32px 28px 24px 28px;
+  min-width: 340px;
+  max-width: 95vw;
+  min-height: 340px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.about-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.about-close-btn:hover {
+  opacity: 1;
+}
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 10px;
+}
+.about-avatar {
+  font-size: 3.2rem;
+  color: #fff;
+  background: #444;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+.about-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.about-version {
+  font-size: 0.95rem;
+  color: #aaa;
+}
+.about-desc {
+  margin: 10px 0 18px 0;
+  font-size: 1.08rem;
+  text-align: center;
+  opacity: 0.92;
+}
+.about-info {
+  text-align: center;
+  margin-bottom: 12px;
+}
+.about-link {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+.about-link:hover {
+  text-decoration: underline;
+}
+.about-socials {
+  margin-top: 8px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+.about-socials a {
+  color: #fff;
+  font-size: 1.45rem;
+  opacity: 0.85;
+  transition: color 0.2s, opacity 0.2s;
+}
+.about-socials a:hover {
+  color: #61dafb;
+  opacity: 1;
+}
+.about-tech,
+.about-credits,
+.about-copyright {
+  font-size: 0.98rem;
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0.85;
+}
+@media (max-width: 500px) {
+  .about-modal {
+    padding: 16px 4vw;
+    min-width: 0;
+  }
+  .about-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.about-modal-macos {
+  background: rgba(255, 255, 255, 0.85);
+  color: #222;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  padding: 36px 32px 28px 32px;
+  min-width: 340px;
+  max-width: 95vw;
+  min-height: 340px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(18px) saturate(1.2);
+  border: 1.5px solid rgba(200, 200, 200, 0.18);
+  animation: about-fadein 0.3s;
+}
+.about-modal-macos.dark {
+  background: rgba(34, 34, 34, 0.92);
+  color: #fff;
+  border: 1.5px solid rgba(80, 80, 80, 0.18);
+}
+.about-close-btn-macos {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #fff;
+  color: #222;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0.85;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-modal-macos.dark .about-close-btn-macos {
+  background: #222;
+  color: #fff;
+}
+.about-close-btn-macos:hover {
+  opacity: 1;
+  background: #eee;
+}
+.about-modal-macos.dark .about-close-btn-macos:hover {
+  background: #444;
+}
+.about-apple-logo {
+  font-size: 2.8rem;
+  color: #222;
+  margin-bottom: 10px;
+  margin-top: 8px;
+  opacity: 0.95;
+}
+.about-modal-macos.dark .about-apple-logo {
+  color: #fff;
+}
+.about-title-macos {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-bottom: 2px;
+}
+.about-version-macos {
+  font-size: 1.02rem;
+  color: #888;
+  margin-bottom: 10px;
+}
+.about-desc-macos {
+  margin: 8px 0 18px 0;
+  font-size: 1.08rem;
+  text-align: center;
+  opacity: 0.92;
+}
+.about-info-macos {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.about-name {
+  font-size: 1.12rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.about-role,
+.about-location,
+.about-phone {
+  font-size: 1.01rem;
+  opacity: 0.92;
+}
+.about-link-macos {
+  color: #007aff;
+  text-decoration: none;
+  font-size: 1.05rem;
+  display: block;
+  margin: 6px 0 2px 0;
+}
+.about-link-macos:hover {
+  text-decoration: underline;
+}
+.about-socials-macos {
+  margin: 10px 0 8px 0;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+.about-socials-macos a {
+  color: #222;
+  font-size: 1.45rem;
+  opacity: 0.85;
+  transition: color 0.2s, opacity 0.2s;
+}
+.about-modal-macos.dark .about-socials-macos a {
+  color: #fff;
+}
+.about-socials-macos a:hover {
+  color: #007aff;
+  opacity: 1;
+}
+.about-tech-macos,
+.about-credits-macos,
+.about-copyright-macos {
+  font-size: 0.98rem;
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0.85;
+}
+@media (max-width: 500px) {
+  .about-modal-macos {
+    padding: 16px 4vw;
+    min-width: 0;
+  }
+}

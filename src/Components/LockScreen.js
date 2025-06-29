@@ -1,13 +1,15 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import "../Styles/BootScreen.css";
-import wallpaper from "../assets/macOS.png";
+import wallpaperLight from "../assets/macOS.png";
+import wallpaperDark from "../assets/macOSdark.jpg";
 
-const LockScreen = () => {
+const LockScreen = ({ wallpaper }) => {
+  const wallpaperImg = wallpaper === "dark" ? wallpaperDark : wallpaperLight;
   return (
     <div
       className="lockscreen-bg"
-      style={{ backgroundImage: `url(${wallpaper})` }}
+      style={{ backgroundImage: `url(${wallpaperImg})` }}
     >
       <div className="lockscreen-blur" />
       <div className="lockscreen-content lockscreen-content-lower">

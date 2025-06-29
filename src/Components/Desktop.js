@@ -402,10 +402,8 @@ const Desktop = ({ darkMode }) => {
   };
 
   const closeWindow = (windowId) => {
-    console.log("Desktop: closeWindow called with ID:", windowId);
     setOpenWindows((prev) => {
       const newWindows = prev.filter((win) => win.id !== windowId);
-      console.log("Desktop: Windows after close:", newWindows.length);
       return newWindows;
     });
   };

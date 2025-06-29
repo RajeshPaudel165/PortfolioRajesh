@@ -21,22 +21,18 @@ const Window = ({
   const windowRef = useRef(null);
 
   const handleClose = () => {
-    console.log("🔴 CLOSE button clicked for window:", id);
     if (onClose) {
       onClose();
     }
   };
 
   const handleMinimize = () => {
-    console.log("🟡 MINIMIZE button clicked for window:", id);
     if (onMinimize) {
       onMinimize(id);
     }
   };
 
   const handleMaximize = () => {
-    console.log("🟢 MAXIMIZE button clicked for window:", id);
-
     if (!isMaximized) {
       // Store original size and position
       setOriginalSize({

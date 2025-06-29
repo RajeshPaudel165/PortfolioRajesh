@@ -16,19 +16,19 @@ const Weather = ({ darkMode }) => {
 
   // Debug logging
   useEffect(() => {
-    console.log(
-      "Google Maps API Key:",
-      GOOGLE_MAPS_API_KEY ? "Present" : "Missing"
-    );
-    console.log("Environment variables:", {
-      REACT_APP_GOOGLE_MAPS_API_KEY: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-      NODE_ENV: process.env.NODE_ENV,
-    });
+    // Removed debug logging
   }, [GOOGLE_MAPS_API_KEY]);
 
   // Fetch weather data using Google Maps API
   const fetchWeatherData = useCallback(
     async (lat, lon) => {
+      if (!GOOGLE_MAPS_API_KEY) {
+        setError(
+          "Google Maps API key not provided. Please check your environment configuration."
+        );
+        setLoading(false);
+        return;
+      }
       try {
         // If we already have weather for this location, use it
         if (lastWeatherLocation.current === location && weather) {
@@ -95,7 +95,6 @@ const Weather = ({ darkMode }) => {
         lastWeatherLocation.current = location;
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching weather data:", err);
         setError("Failed to load weather data");
         setLoading(false);
       }
@@ -107,10 +106,6 @@ const Weather = ({ darkMode }) => {
   const fetchLocationAndWeather = useCallback(
     async (lat, lon) => {
       if (!GOOGLE_MAPS_API_KEY) {
-        console.error("Google Maps API key not provided");
-        console.error(
-          "Please check your .env file contains: REACT_APP_GOOGLE_MAPS_API_KEY=your_api_key_here"
-        );
         setError(
           "Google Maps API key not provided. Please check your environment configuration."
         );
@@ -119,11 +114,6 @@ const Weather = ({ darkMode }) => {
       }
 
       try {
-        console.log(
-          "Fetching location details with API key:",
-          GOOGLE_MAPS_API_KEY.substring(0, 10) + "..."
-        );
-
         // Fetch location details
         const locationResponse = await fetch(
           `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${GOOGLE_MAPS_API_KEY}`
@@ -178,7 +168,6 @@ const Weather = ({ darkMode }) => {
         // Fetch weather data using Google's Weather API (via Places API)
         await fetchWeatherData(lat, lon);
       } catch (err) {
-        console.error("Error fetching location and weather:", err);
         setError(`Failed to load weather data: ${err.message}`);
         setLoading(false);
       }
@@ -214,7 +203,6 @@ const Weather = ({ darkMode }) => {
       setLocation(city);
     } catch (err) {
       setError(err.message || "Failed to load weather data");
-      console.error("Weather API error:", err);
     } finally {
       setLoading(false);
     }
@@ -233,7 +221,6 @@ const Weather = ({ darkMode }) => {
           fetchLocationAndWeather(coords.lat, coords.lon);
         },
         (error) => {
-          console.log("Geolocation error:", error);
           // Fallback to default location
           fetchWeatherByCity(location);
         }
@@ -250,7 +237,6 @@ const Weather = ({ darkMode }) => {
 
   const searchLocation = async (query) => {
     if (!GOOGLE_MAPS_API_KEY) {
-      console.error("Google Maps API key not provided for search");
       setError(
         "Google Maps API key not provided. Please check your environment configuration."
       );
@@ -261,11 +247,7 @@ const Weather = ({ darkMode }) => {
     setError(null);
 
     try {
-      console.log(
-        "Searching location with API key:",
-        GOOGLE_MAPS_API_KEY.substring(0, 10) + "..."
-      );
-
+      // Fetch location details
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
           query
@@ -301,7 +283,6 @@ const Weather = ({ darkMode }) => {
         setLoading(false);
       }
     } catch (err) {
-      console.error("Location search error:", err);
       setError(`Failed to search location: ${err.message}`);
       setLoading(false);
     }

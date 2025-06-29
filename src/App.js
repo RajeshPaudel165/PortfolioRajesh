@@ -6,11 +6,13 @@ import Launchpad from "./Pages/Launchpad";
 import AppStore from "./Pages/AppStore";
 import BootScreen from "./Components/BootScreen";
 import LockScreen from "./Components/LockScreen";
+import About from "./Pages/About";
+import { FaLinkedin, FaInstagram, FaFacebook } from "react-icons/fa";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem("darkMode");
-    return saved ? JSON.parse(saved) : false;
+    return saved ? JSON.parse(saved) : true;
   });
 
   const [openApps, setOpenApps] = useState([]);
@@ -21,20 +23,10 @@ function App() {
   const [wallpaper, setWallpaper] = useState("default");
   const [bootPhase, setBootPhase] = useState("start"); // start, booting, lock, desktop
   const [bootFade, setBootFade] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   // Debug environment variables
-  useEffect(() => {
-    console.log("App Environment Variables Check:");
-    console.log(
-      "REACT_APP_GOOGLE_MAPS_API_KEY:",
-      process.env.REACT_APP_GOOGLE_MAPS_API_KEY ? "Present" : "Missing"
-    );
-    console.log(
-      "REACT_APP_EMAILJS_SERVICE_ID:",
-      process.env.REACT_APP_EMAILJS_SERVICE_ID ? "Present" : "Missing"
-    );
-    console.log("NODE_ENV:", process.env.NODE_ENV);
-  }, []);
+  useEffect(() => {}, []);
 
   // Check device size on mount and resize
   useEffect(() => {
@@ -151,7 +143,6 @@ function App() {
 
   const handleAppInstalled = (app) => {
     // Handle app installation from App Store
-    console.log("App installed:", app);
   };
 
   if (bootPhase === "start") {
@@ -161,13 +152,13 @@ function App() {
     return <BootScreen showProgressBar fadeOut={bootFade} />;
   }
   if (bootPhase === "lock") {
-    return <LockScreen />;
+    return <LockScreen wallpaper={wallpaper} />;
   }
 
   // Mobile warning overlay
   if (showMobileWarning) {
     return (
-      <div className="mobile-warning">
+      <div className="mobile-warning" style={{ background: "#000" }}>
         <div className="mobile-warning-content">
           <div className="mobile-warning-icon">💻</div>
           <h2>Desktop Experience Required</h2>
@@ -179,12 +170,80 @@ function App() {
             For the best experience, please use a device with a screen width of
             768px or larger.
           </p>
-          <button
-            className="mobile-warning-button"
-            onClick={() => setShowMobileWarning(false)}
-          >
-            Continue Anyway
-          </button>
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <div
+              style={{
+                color: "#fff",
+                fontWeight: 500,
+                marginBottom: 10,
+                fontSize: 18,
+              }}
+            >
+              Connect with me:
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: 24,
+                marginBottom: 10,
+              }}
+            >
+              <a
+                href="https://www.linkedin.com/in/rajesh-paudel-822022371/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#0077b5", fontSize: 32 }}
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="https://www.instagram.com/_rajeshpaudel_/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#E4405F", fontSize: 32 }}
+              >
+                <FaInstagram />
+              </a>
+              <a
+                href="https://www.facebook.com/rajesh.paudel.965580"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#1877f3", fontSize: 32 }}
+              >
+                <FaFacebook />
+              </a>
+            </div>
+            <div style={{ color: "#aaa", fontSize: 13, marginTop: 8 }}>
+              <div>
+                LinkedIn:{" "}
+                <a
+                  href="https://www.linkedin.com/in/rajesh-paudel-822022371/"
+                  style={{ color: "#0077b5" }}
+                >
+                  rajesh-paudel-822022371
+                </a>
+              </div>
+              <div>
+                Instagram:{" "}
+                <a
+                  href="https://www.instagram.com/_rajeshpaudel_/"
+                  style={{ color: "#E4405F" }}
+                >
+                  _rajeshpaudel_
+                </a>
+              </div>
+              <div>
+                Facebook:{" "}
+                <a
+                  href="https://www.facebook.com/rajesh.paudel.965580"
+                  style={{ color: "#1877f3" }}
+                >
+                  rajesh.paudel.965580
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -192,7 +251,11 @@ function App() {
 
   return (
     <div className={`App ${darkMode ? "dark-mode" : "light-mode"}`}>
-      <MenuBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <MenuBar
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        onAbout={() => setAboutOpen(true)}
+      />
       <Desktop
         darkMode={darkMode}
         openApp={openApp}
@@ -204,6 +267,8 @@ function App() {
         setShowLaunchpad={setShowLaunchpad}
         showAppStore={showAppStore}
         setShowAppStore={setShowAppStore}
+        wallpaper={wallpaper}
+        setWallpaper={setWallpaper}
       />
       {showLaunchpad && (
         <Launchpad
@@ -216,6 +281,11 @@ function App() {
       {showAppStore && (
         <AppStore darkMode={darkMode} onAppInstalled={handleAppInstalled} />
       )}
+      <About
+        open={aboutOpen}
+        onClose={() => setAboutOpen(false)}
+        darkMode={darkMode}
+      />
     </div>
   );
 }

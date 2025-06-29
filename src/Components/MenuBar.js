@@ -3,7 +3,7 @@ import "../Styles/MenuBar.css";
 import { FaApple, FaWifi, FaSearch } from "react-icons/fa";
 import { BsBatteryFull } from "react-icons/bs";
 
-const MenuBar = ({ darkMode, toggleDarkMode }) => {
+const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isViewMenuOpen, setIsViewMenuOpen] = useState(false); // State for dropdown visibility
   const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState(false); // State for settings dropdown
@@ -89,8 +89,9 @@ const MenuBar = ({ darkMode, toggleDarkMode }) => {
                 </div>
               </div>
               <div className="dropdown-separator"></div>
-              <div className="dropdown-item">Preferences</div>
-              <div className="dropdown-item">About</div>
+              <div className="dropdown-item" onClick={onAbout}>
+                About
+              </div>
             </div>
           )}
         </div>
