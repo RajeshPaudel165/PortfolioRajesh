@@ -124,8 +124,37 @@ const MenuBar = ({ darkMode, toggleDarkMode, onAbout, onLogout }) => {
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!event.target.closest(".menu-item-container")) {
+      if (
+        appleMenuRef.current &&
+        !appleMenuRef.current.contains(event.target) &&
+        socialsMenuRef.current &&
+        !socialsMenuRef.current.contains(event.target) &&
+        controlCenterRef.current &&
+        !controlCenterRef.current.contains(event.target)
+      ) {
+        setIsAppleMenuOpen(false);
+        setIsSocialsOpen(false);
         setIsControlCenterOpen(false);
+      } else {
+        // Close individual dropdowns if their own ref is not the target
+        if (
+          appleMenuRef.current &&
+          !appleMenuRef.current.contains(event.target)
+        ) {
+          setIsAppleMenuOpen(false);
+        }
+        if (
+          socialsMenuRef.current &&
+          !socialsMenuRef.current.contains(event.target)
+        ) {
+          setIsSocialsOpen(false);
+        }
+        if (
+          controlCenterRef.current &&
+          !controlCenterRef.current.contains(event.target)
+        ) {
+          setIsControlCenterOpen(false);
+        }
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
