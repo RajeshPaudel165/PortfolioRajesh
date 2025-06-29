@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/MenuBar.css";
-import { FaApple, FaWifi } from "react-icons/fa";
+import { FaApple, FaWifi, FaFacebook, FaInstagram } from "react-icons/fa";
 import {
   BsBatteryFull,
   BsBatteryHalf,
@@ -82,20 +82,20 @@ const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
                 LinkedIn
               </a>
               <a
-                href="https://www.facebook.com/rajesh.paudel.568"
+                href="https://www.facebook.com/rajesh.paudel.965580"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="dropdown-item"
               >
-                Facebook
+                <FaFacebook />
               </a>
               <a
-                href="https://www.instagram.com/rajesh_paudel_/"
+                href="https://www.instagram.com/_rajeshpaudel_/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="dropdown-item"
               >
-                Instagram
+                <FaInstagram />
               </a>
             </div>
           )}
