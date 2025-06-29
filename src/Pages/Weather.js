@@ -261,7 +261,7 @@ const Weather = ({ darkMode }) => {
     } else {
       fetchWeatherByCity(location);
     }
-  }, []);
+  }, [fetchLocationAndWeather, fetchWeatherByCity, location]);
 
   const searchLocation = async (query) => {
     setLoading(true);
