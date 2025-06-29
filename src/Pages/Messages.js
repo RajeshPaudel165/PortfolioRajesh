@@ -77,6 +77,16 @@ const Messages = ({ darkMode }) => {
           subject: newMessage.subject,
           message: newMessage.message,
           to_name: "Rajesh Paudel",
+          current_date: new Date().toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+          current_time: new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          }),
         };
 
         await emailjs.send(
