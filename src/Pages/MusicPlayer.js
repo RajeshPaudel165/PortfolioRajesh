@@ -40,6 +40,7 @@ const MusicPlayer = ({ darkMode }) => {
       duration: "5:55",
       cover: hataridaiImage,
       audioUrl:
+        process.env.PUBLIC_URL +
         "/music/Sajjan Raj Vaidya - Hataarindai, Bataasindai [Official Release] - Sajjan.mp3",
     },
     {
@@ -49,7 +50,9 @@ const MusicPlayer = ({ darkMode }) => {
       album: "Lloyd Ellis",
       duration: "6:30",
       cover: downloadImage,
-      audioUrl: "/music/Travis Scott - Hell Of A Night - Lloyd Ellis.mp3",
+      audioUrl:
+        process.env.PUBLIC_URL +
+        "/music/Travis Scott - Hell Of A Night - Lloyd Ellis.mp3",
     },
     {
       id: 3,
@@ -58,7 +61,9 @@ const MusicPlayer = ({ darkMode }) => {
       album: "The Weeknd",
       duration: "5:02",
       cover: trilogyImage,
-      audioUrl: "/music/The Weeknd - The Morning - The Weeknd.mp3",
+      audioUrl:
+        process.env.PUBLIC_URL +
+        "/music/The Weeknd - The Morning - The Weeknd.mp3",
     },
     {
       id: 4,
@@ -68,6 +73,7 @@ const MusicPlayer = ({ darkMode }) => {
       duration: "3:03",
       cover: johnImage,
       audioUrl:
+        process.env.PUBLIC_URL +
         "/music/John Legend - All of Me (Official Video) - johnlegendVEVO.mp3",
     },
     {
@@ -77,7 +83,9 @@ const MusicPlayer = ({ darkMode }) => {
       album: "After Hours",
       duration: "7:11",
       cover: afterImage,
-      audioUrl: "/music/The Weeknd - After Hours (Audio) - The Weeknd.mp3",
+      audioUrl:
+        process.env.PUBLIC_URL +
+        "/music/The Weeknd - After Hours (Audio) - The Weeknd.mp3",
     },
   ];
 
