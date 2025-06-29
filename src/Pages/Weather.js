@@ -28,14 +28,14 @@ const Weather = ({ darkMode }) => {
 
   // Debug logging
   useEffect(() => {
-    console.log(
-      "Google Maps API Key:",
-      GOOGLE_MAPS_API_KEY ? "Present" : "Missing"
-    );
-    console.log("Environment variables:", {
-      REACT_APP_GOOGLE_MAPS_API_KEY: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-      NODE_ENV: process.env.NODE_ENV,
-    });
+    // console.log(
+    //   "Google Maps API Key:",
+    //   GOOGLE_MAPS_API_KEY ? "Present" : "Missing"
+    // );
+    // console.log("Environment variables:", {
+    //   REACT_APP_GOOGLE_MAPS_API_KEY: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    //   NODE_ENV: process.env.NODE_ENV,
+    // });
   }, [GOOGLE_MAPS_API_KEY]);
 
   // Fetch weather data using Google Maps API
@@ -107,7 +107,7 @@ const Weather = ({ darkMode }) => {
         lastWeatherLocation.current = location;
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching weather data:", err);
+        // console.error("Error fetching weather data:", err);
         setError("Failed to load weather data");
         setLoading(false);
       }
@@ -119,10 +119,10 @@ const Weather = ({ darkMode }) => {
   const fetchLocationAndWeather = useCallback(
     async (lat, lon) => {
       if (!GOOGLE_MAPS_API_KEY) {
-        console.error("Google Maps API key not provided");
-        console.error(
-          "Please check your .env file contains: REACT_APP_GOOGLE_MAPS_API_KEY=your_api_key_here"
-        );
+        // console.error("Google Maps API key not provided");
+        // console.error(
+        //   "Please check your .env file contains: REACT_APP_GOOGLE_MAPS_API_KEY=your_api_key_here"
+        // );
         setError(
           "Google Maps API key not provided. Please check your environment configuration."
         );
@@ -131,10 +131,10 @@ const Weather = ({ darkMode }) => {
       }
 
       try {
-        console.log(
-          "Fetching location details with API key:",
-          GOOGLE_MAPS_API_KEY.substring(0, 10) + "..."
-        );
+        // console.log(
+        //   "Fetching location details with API key:",
+        //   GOOGLE_MAPS_API_KEY.substring(0, 10) + "..."
+        // );
 
         // Fetch location details
         const locationResponse = await fetch(
@@ -190,7 +190,7 @@ const Weather = ({ darkMode }) => {
         // Fetch weather data using Google's Weather API (via Places API)
         await fetchWeatherData(lat, lon);
       } catch (err) {
-        console.error("Error fetching location and weather:", err);
+        // console.error("Error fetching location and weather:", err);
         setError(`Failed to load weather data: ${err.message}`);
         setLoading(false);
       }
@@ -238,7 +238,7 @@ const Weather = ({ darkMode }) => {
       setWeather(mockWeatherData);
       setLoading(false);
     } catch (err) {
-      console.error("Error fetching weather by city:", err);
+      // console.error("Error fetching weather by city:", err);
       setError("Failed to load weather data");
       setLoading(false);
     }
@@ -254,7 +254,7 @@ const Weather = ({ darkMode }) => {
           fetchLocationAndWeather(lat, lon);
         },
         (err) => {
-          console.error("Geolocation error:", err);
+          // console.error("Geolocation error:", err);
           fetchWeatherByCity(location);
         }
       );
@@ -269,6 +269,7 @@ const Weather = ({ darkMode }) => {
 
     try {
       if (!GOOGLE_MAPS_API_KEY) {
+        // console.error("Google Maps API key not provided");
         throw new Error("Google Maps API key not provided");
       }
 
@@ -304,7 +305,7 @@ const Weather = ({ darkMode }) => {
         setLoading(false);
       }
     } catch (err) {
-      console.error("Location search error:", err);
+      // console.error("Location search error:", err);
       setError(`Failed to search location: ${err.message}`);
       setLoading(false);
     }
