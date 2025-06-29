@@ -202,12 +202,569 @@
 }
 
 .light-mode .dropdown-menu {
-  background-color: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.light-mode .dropdown-item {
+  color: #222;
 }
 
 .light-mode .dropdown-item:hover {
-  background-color: var(--accent-color);
-  color: white;
+  background: #f0f0f0;
+  color: #007aff;
+}
+
+/* Control Center Styles */
+.control-center-container {
+  position: relative;
+}
+
+.control-center-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: var(--text-primary);
+}
+
+.control-center-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-center-button:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Light mode specific styling for control center button */
+.light-mode .control-center-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .control-center-button:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.control-center-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.control-center-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  background-color: var(--text-primary);
+  border-radius: 50%;
+}
+
+.control-center-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: rgba(28, 28, 30, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  margin-top: 8px;
+  z-index: 1000;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.control-section {
+  margin-bottom: 20px;
+}
+
+.control-section:last-child {
+  margin-bottom: 0;
+}
+
+.control-section h4 {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  opacity: 0.9;
+}
+
+/* Toggle Grid */
+.toggle-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.toggle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.toggle-item span {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  flex: 1;
+  margin-left: 8px;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  width: 44px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-switch.active {
+  background: #007aff;
+}
+
+.toggle-slider {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.active .toggle-slider {
+  transform: translateX(20px);
+}
+
+/* Slider Items */
+.slider-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.slider-item:last-child {
+  margin-bottom: 0;
+}
+
+.slider-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.slider-item span {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: 8px;
+  min-width: 60px;
+}
+
+.control-slider {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+  margin: 0 12px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.control-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #007aff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #007aff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider-value {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.7;
+  min-width: 35px;
+  text-align: right;
+}
+
+/* Focus Modes */
+.focus-modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.focus-mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.focus-mode:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.focus-mode.active {
+  background: rgba(0, 122, 255, 0.2);
+  border-color: #007aff;
+}
+
+.focus-mode span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.focus-mode span:first-child {
+  font-size: 14px;
+}
+
+/* Focus Indicator */
+.focus-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(0, 122, 255, 0.2);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 122, 255, 0.3);
+  margin-right: 8px;
+}
+
+.focus-indicator span {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.focus-indicator span:first-child {
+  font-size: 12px;
+}
+
+/* Menu Item Click Styles */
+.menu-item {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Light Mode Styles */
+.menu-bar:not(.dark-mode) .control-center-panel {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.menu-bar:not(.dark-mode) .control-section h4 {
+  color: #000;
+}
+
+.menu-bar:not(.dark-mode) .toggle-item {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.menu-bar:not(.dark-mode) .toggle-item:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.menu-bar:not(.dark-mode) .toggle-item span,
+.menu-bar:not(.dark-mode) .slider-item span {
+  color: #000;
+}
+
+.menu-bar:not(.dark-mode) .slider-item {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.menu-bar:not(.dark-mode) .control-slider {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.menu-bar:not(.dark-mode) .slider-value {
+  color: #000;
+}
+
+.menu-bar:not(.dark-mode) .focus-mode {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.menu-bar:not(.dark-mode) .focus-mode:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.menu-bar:not(.dark-mode) .focus-mode span {
+  color: #000;
+}
+
+.menu-bar:not(.dark-mode) .focus-indicator {
+  background: rgba(0, 122, 255, 0.1);
+  border-color: rgba(0, 122, 255, 0.2);
+}
+
+.menu-bar:not(.dark-mode) .focus-indicator span {
+  color: #007aff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-bar {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .menu-bar-left {
+    gap: 10px;
+  }
+
+  .menu-bar-right {
+    gap: 8px;
+  }
+
+  .menu-item-brand {
+    font-size: 12px;
+  }
+
+  .menu-item {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+
+  .status-icon {
+    font-size: 14px;
+  }
+
+  .battery-percentage {
+    font-size: 10px;
+  }
+
+  .date-time {
+    font-size: 10px;
+    gap: 4px;
+  }
+
+  .control-center-panel {
+    width: 280px;
+    right: -20px;
+  }
+
+  .focus-modes {
+    grid-template-columns: 1fr;
+  }
+
+  /* Ensure dropdowns are properly positioned on mobile */
+  .dropdown-menu,
+  .apple-dropdown {
+    min-width: 120px;
+    font-size: 13px;
+  }
+
+  .dropdown-item,
+  .apple-dropdown-item {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  /* Make social media links more prominent on mobile */
+  .menu-item-container {
+    position: relative;
+  }
+
+  /* Ensure dropdowns don't get cut off on small screens */
+  .dropdown-menu {
+    max-width: calc(100vw - 20px);
+    left: 0;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .menu-bar {
+    padding: 0 8px;
+  }
+
+  .menu-bar-left {
+    gap: 8px;
+  }
+
+  .menu-bar-right {
+    gap: 6px;
+  }
+
+  .menu-item-brand {
+    font-size: 11px;
+  }
+
+  .menu-item {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+
+  .date-time {
+    font-size: 9px;
+  }
+
+  .battery-percentage {
+    font-size: 9px;
+  }
+}
+
+.apple-dropdown {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  min-width: 140px;
+  background: rgba(28, 28, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+.apple-dropdown-item {
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.apple-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Match Socials dropdown style */
+.dropdown-menu {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  min-width: 140px;
+  background: rgba(28, 28, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Light mode styles for Apple dropdown menu and items */
+.light-mode .apple-dropdown {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.light-mode .apple-dropdown-item {
+  color: #222;
+}
+
+.light-mode .apple-dropdown-item:hover {
+  background: #f0f0f0;
+  color: #007aff;
 }

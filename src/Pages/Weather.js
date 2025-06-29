@@ -11,6 +11,10 @@ import {
   FaSearch,
   FaExclamationTriangle,
   FaRedo,
+  FaLocationArrow,
+  FaEye,
+  FaTachometerAlt,
+  FaThermometerHalf,
 } from "react-icons/fa";
 
 const Weather = ({ darkMode }) => {
@@ -21,6 +25,7 @@ const Weather = ({ darkMode }) => {
   const [searchInput, setSearchInput] = useState("");
   const [userLocation, setUserLocation] = useState(null);
   const [locationDetails, setLocationDetails] = useState(null);
+  const [showSearch, setShowSearch] = useState(false);
   const lastWeatherLocation = useRef(null);
 
   // Google Maps API configuration
@@ -300,6 +305,7 @@ const Weather = ({ darkMode }) => {
 
         setLocation(query);
         await fetchLocationAndWeather(lat, lng);
+        setShowSearch(false);
       } else {
         setError("Location not found");
         setLoading(false);
@@ -331,26 +337,26 @@ const Weather = ({ darkMode }) => {
     const conditionLower = condition.toLowerCase();
 
     if (conditionLower.includes("clear")) {
-      return <FaSun size={48} />;
+      return <FaSun size={64} />;
     } else if (conditionLower.includes("clouds")) {
-      return <FaCloud size={48} />;
+      return <FaCloud size={64} />;
     } else if (
       conditionLower.includes("rain") ||
       conditionLower.includes("drizzle")
     ) {
-      return <FaCloudRain size={48} />;
+      return <FaCloudRain size={64} />;
     } else if (conditionLower.includes("snow")) {
-      return <FaSnowflake size={48} />;
+      return <FaSnowflake size={64} />;
     } else if (conditionLower.includes("thunder")) {
-      return <FaBolt size={48} />;
+      return <FaBolt size={64} />;
     } else if (
       conditionLower.includes("mist") ||
       conditionLower.includes("fog") ||
       conditionLower.includes("haze")
     ) {
-      return <FaSmog size={48} />;
+      return <FaSmog size={64} />;
     } else {
-      return <FaSun size={48} />;
+      return <FaSun size={64} />;
     }
   };
 
@@ -407,84 +413,149 @@ const Weather = ({ darkMode }) => {
 
   return (
     <div className={`weather-app ${darkMode ? "dark-mode" : ""}`}>
+      {/* Header */}
       <div className="weather-header">
-        <h2>Weather</h2>
-        <div className="weather-time">{formatTime()}</div>
+        <div className="header-left">
+          <h1>Weather</h1>
+          <div className="current-time">{formatTime()}</div>
+        </div>
+        <div className="header-right">
+          <button
+            className="search-toggle-btn"
+            onClick={() => setShowSearch(!showSearch)}
+          >
+            <FaSearch size={16} />
+          </button>
+          <button className="refresh-btn" onClick={handleRefresh}>
+            <FaRedo size={16} />
+          </button>
+        </div>
       </div>
 
-      <div className="weather-search">
-        <form onSubmit={handleSearch}>
-          <div className="search-input">
-            <FaMapMarkerAlt size={16} />
-            <input
-              type="text"
-              placeholder="Search city or address..."
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-            />
-            <button type="submit">
-              <FaSearch size={16} />
-            </button>
-          </div>
-        </form>
-      </div>
+      {/* Search Bar */}
+      {showSearch && (
+        <div className="weather-search">
+          <form onSubmit={handleSearch}>
+            <div className="search-input">
+              <FaMapMarkerAlt size={16} />
+              <input
+                type="text"
+                placeholder="Search for a city..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                autoFocus
+              />
+              <button type="submit">
+                <FaSearch size={16} />
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
+      {/* Main Weather Display */}
       <div className="weather-main">
-        <div className="weather-location">{weather.location}</div>
-        <div className="weather-icon">
-          {getWeatherIcon(weather.condition, weather.icon)}
+        <div className="location-section">
+          <div className="location-info">
+            <FaLocationArrow size={16} />
+            <span className="location-name">{weather.location}</span>
+          </div>
         </div>
-        <div className="weather-temperature">{weather.temperature}°F</div>
-        <div className="weather-condition">{weather.description}</div>
-        <div className="weather-feels-like">
-          Feels like {weather.feelsLike}°F
+
+        <div className="current-weather">
+          <div className="weather-icon-large">
+            {getWeatherIcon(weather.condition, weather.icon)}
+          </div>
+          <div className="temperature-section">
+            <div className="temperature-main">
+              {Math.round(weather.temperature)}°
+            </div>
+            <div className="temperature-range">
+              <span className="high">{Math.round(weather.high)}°</span>
+              <span className="separator"> / </span>
+              <span className="low">{Math.round(weather.low)}°</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="weather-description">{weather.description}</div>
+
+        <div className="feels-like">
+          Feels like {Math.round(weather.feelsLike)}°
         </div>
       </div>
 
-      <div className="weather-details">
-        <div className="weather-detail-item">
-          <span className="detail-label">High</span>
-          <span className="detail-value">{weather.high}°F</span>
+      {/* Weather Details Grid */}
+      <div className="weather-details-grid">
+        <div className="detail-card">
+          <div className="detail-icon">
+            <FaThermometerHalf size={20} />
+          </div>
+          <div className="detail-content">
+            <div className="detail-label">Humidity</div>
+            <div className="detail-value">{Math.round(weather.humidity)}%</div>
+          </div>
         </div>
-        <div className="weather-detail-item">
-          <span className="detail-label">Low</span>
-          <span className="detail-value">{weather.low}°F</span>
+
+        <div className="detail-card">
+          <div className="detail-icon">
+            <FaTachometerAlt size={20} />
+          </div>
+          <div className="detail-content">
+            <div className="detail-label">Wind</div>
+            <div className="detail-value">
+              {Math.round(weather.windSpeed)} mph
+            </div>
+          </div>
         </div>
-        <div className="weather-detail-item">
-          <span className="detail-label">Humidity</span>
-          <span className="detail-value">{weather.humidity}%</span>
+
+        <div className="detail-card">
+          <div className="detail-icon">
+            <FaEye size={20} />
+          </div>
+          <div className="detail-content">
+            <div className="detail-label">Visibility</div>
+            <div className="detail-value">
+              {Math.round(weather.visibility)} km
+            </div>
+          </div>
         </div>
-        <div className="weather-detail-item">
-          <span className="detail-label">Wind</span>
-          <span className="detail-value">{weather.windSpeed} mph</span>
-        </div>
-        <div className="weather-detail-item">
-          <span className="detail-label">Pressure</span>
-          <span className="detail-value">{weather.pressure} hPa</span>
-        </div>
-        <div className="weather-detail-item">
-          <span className="detail-label">Visibility</span>
-          <span className="detail-value">{weather.visibility} km</span>
+
+        <div className="detail-card">
+          <div className="detail-icon">
+            <FaTachometerAlt size={20} />
+          </div>
+          <div className="detail-content">
+            <div className="detail-label">Pressure</div>
+            <div className="detail-value">
+              {Math.round(weather.pressure)} hPa
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="weather-sun-info">
-        <div className="sun-item">
-          <span className="sun-label">Sunrise</span>
-          <span className="sun-time">{formatSunTime(weather.sunrise)}</span>
+      {/* Sun Information */}
+      <div className="sun-info">
+        <div className="sun-card">
+          <div className="sun-icon">🌅</div>
+          <div className="sun-content">
+            <div className="sun-label">Sunrise</div>
+            <div className="sun-time">{formatSunTime(weather.sunrise)}</div>
+          </div>
         </div>
-        <div className="sun-item">
-          <span className="sun-label">Sunset</span>
-          <span className="sun-time">{formatSunTime(weather.sunset)}</span>
+
+        <div className="sun-card">
+          <div className="sun-icon">🌇</div>
+          <div className="sun-content">
+            <div className="sun-label">Sunset</div>
+            <div className="sun-time">{formatSunTime(weather.sunset)}</div>
+          </div>
         </div>
       </div>
 
+      {/* Footer */}
       <div className="weather-footer">
         <p>Powered by Google Maps API</p>
-        <button className="refresh-btn" onClick={handleRefresh}>
-          <FaRedo size={16} style={{ marginRight: "8px" }} />
-          Refresh
-        </button>
       </div>
     </div>
   );

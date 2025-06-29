@@ -126,6 +126,10 @@ function App() {
     // Handle app installation from App Store
   };
 
+  const handleLogout = () => {
+    setBootPhase("lock");
+  };
+
   if (bootPhase === "start") {
     return <BootScreen showStartButton onStart={handleStartBoot} />;
   }
@@ -187,7 +191,7 @@ function App() {
                 <FaInstagram />
               </a>
               <a
-                href="https://www.facebook.com/rajesh.paudel.965580"
+                href="https://www.facebook.com/rajesh.paudel.965580/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#1877f2", fontSize: 32 }}
@@ -207,6 +211,7 @@ function App() {
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
         onAbout={() => setAboutOpen(true)}
+        onLogout={handleLogout}
       />
       <Desktop
         darkMode={darkMode}
