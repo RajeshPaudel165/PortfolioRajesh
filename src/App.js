@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import MenuBar from "./Components/MenuBar";
 import Desktop from "./Components/Desktop";
 import Launchpad from "./Pages/Launchpad";
 import AppStore from "./Pages/AppStore";
+import BootScreen from "./Components/BootScreen";
+import LockScreen from "./Components/LockScreen";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -16,6 +18,9 @@ function App() {
   const [showLaunchpad, setShowLaunchpad] = useState(false);
   const [showAppStore, setShowAppStore] = useState(false);
   const [showMobileWarning, setShowMobileWarning] = useState(false);
+  const [wallpaper, setWallpaper] = useState("default");
+  const [bootPhase, setBootPhase] = useState("start"); // start, booting, lock, desktop
+  const [bootFade, setBootFade] = useState(false);
 
   // Debug environment variables
   useEffect(() => {
@@ -47,6 +52,30 @@ function App() {
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
   }, [darkMode]);
+
+  // Start boot when user clicks start
+  const handleStartBoot = useCallback(() => {
+    setBootPhase("booting");
+    setTimeout(() => setBootFade(true), 5000);
+    setTimeout(() => {
+      setBootPhase("lock");
+      setBootFade(false);
+    }, 5800);
+  }, []);
+
+  // Unlock on any key or click
+  useEffect(() => {
+    if (bootPhase !== "lock") return;
+    const unlock = () => setBootPhase("desktop");
+    window.addEventListener("keydown", unlock);
+    window.addEventListener("mousedown", unlock);
+    window.addEventListener("touchstart", unlock);
+    return () => {
+      window.removeEventListener("keydown", unlock);
+      window.removeEventListener("mousedown", unlock);
+      window.removeEventListener("touchstart", unlock);
+    };
+  }, [bootPhase]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -124,6 +153,16 @@ function App() {
     // Handle app installation from App Store
     console.log("App installed:", app);
   };
+
+  if (bootPhase === "start") {
+    return <BootScreen showStartButton onStart={handleStartBoot} />;
+  }
+  if (bootPhase === "booting") {
+    return <BootScreen showProgressBar fadeOut={bootFade} />;
+  }
+  if (bootPhase === "lock") {
+    return <LockScreen />;
+  }
 
   // Mobile warning overlay
   if (showMobileWarning) {

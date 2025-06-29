@@ -1,0 +1,170 @@
+.boot-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s ease;
+  opacity: 1;
+}
+
+.boot-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.boot-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boot-apple-logo {
+  color: #fff;
+  font-size: 80px;
+  margin-bottom: 32px;
+}
+
+.boot-progress-bar {
+  width: 180px;
+  height: 10px;
+  background: #222;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.boot-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #fff 60%, #888 100%);
+  border-radius: 6px;
+  animation: boot-progress 4.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes boot-progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.boot-start-btn {
+  margin-top: 32px;
+  padding: 12px 36px;
+  font-size: 1.2rem;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s;
+}
+.boot-start-btn:hover {
+  background: #444;
+}
+
+.lockscreen-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lockscreen-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(16px) brightness(0.7);
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+.lockscreen-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.lock-apple-logo {
+  color: #fff;
+  font-size: 38px;
+  margin-bottom: 18px;
+  opacity: 0.92;
+}
+.lockscreen-clock {
+  color: #fff;
+  font-size: 3.2rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+.lockscreen-date {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+  opacity: 0.85;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.lockscreen-avatar {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  margin-bottom: 18px;
+  background: #222;
+}
+.lockscreen-name {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.lock-message {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  opacity: 0.85;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.lockscreen-avatar-icon {
+  width: 92px;
+  height: 92px;
+  color: #fff;
+  border-radius: 50%;
+  background: #222;
+  border: 2.5px solid #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lockscreen-content-lower {
+  margin-top: 70vh;
+}

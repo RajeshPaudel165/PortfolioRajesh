@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import "../Styles/Weather.css";
 
 const Weather = ({ darkMode }) => {
@@ -9,6 +9,7 @@ const Weather = ({ darkMode }) => {
   const [searchInput, setSearchInput] = useState("");
   const [userLocation, setUserLocation] = useState(null);
   const [locationDetails, setLocationDetails] = useState(null);
+  const lastWeatherLocation = useRef(null);
 
   // Google Maps API configuration
   const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -29,41 +30,37 @@ const Weather = ({ darkMode }) => {
   const fetchWeatherData = useCallback(
     async (lat, lon) => {
       try {
+        // If we already have weather for this location, use it
+        if (lastWeatherLocation.current === location && weather) {
+          setLoading(false);
+          return;
+        }
         // Generate realistic weather data based on location and current time
         const now = new Date();
         const hour = now.getHours();
         const month = now.getMonth();
 
-        // Simple weather generation based on time and rough location
         let temperature, condition, description;
-
         if (month >= 5 && month <= 8) {
-          // Summer months
-          temperature = Math.floor(Math.random() * 20) + 70; // 70-90°F
+          temperature = 70 + ((lat + lon) % 20); // 70-90°F, deterministic
           condition = "Clear";
           description = "Sunny";
         } else if (month >= 11 || month <= 2) {
-          // Winter months
-          temperature = Math.floor(Math.random() * 30) + 30; // 30-60°F
+          temperature = 30 + ((lat + lon) % 30); // 30-60°F
           condition = "Clouds";
           description = "Partly cloudy";
         } else {
-          // Spring/Fall
-          temperature = Math.floor(Math.random() * 25) + 50; // 50-75°F
+          temperature = 50 + ((lat + lon) % 25); // 50-75°F
           condition = "Clear";
           description = "Clear sky";
         }
-
-        // Add some variation based on time of day
         if (hour < 6 || hour > 20) {
           temperature -= 10;
           description = "Clear night";
         }
-
-        const humidity = Math.floor(Math.random() * 40) + 40; // 40-80%
-        const windSpeed = Math.floor(Math.random() * 15) + 5; // 5-20 mph
-        const pressure = Math.floor(Math.random() * 50) + 1000; // 1000-1050 hPa
-
+        const humidity = 40 + ((lat + lon) % 40); // 40-80%
+        const windSpeed = 5 + ((lat + lon) % 15); // 5-20 mph
+        const pressure = 1000 + ((lat + lon) % 50); // 1000-1050 hPa
         const weatherData = {
           location: locationDetails
             ? `${locationDetails.city}, ${locationDetails.state}`
@@ -73,11 +70,11 @@ const Weather = ({ darkMode }) => {
           description,
           humidity,
           windSpeed,
-          feelsLike: temperature + Math.floor(Math.random() * 5) - 2,
-          high: temperature + Math.floor(Math.random() * 10) + 5,
-          low: temperature - Math.floor(Math.random() * 10) - 5,
+          feelsLike: temperature + ((lat + lon) % 5) - 2,
+          high: temperature + ((lat + lon) % 10) + 5,
+          low: temperature - ((lat + lon) % 10) - 5,
           pressure,
-          visibility: Math.floor(Math.random() * 5) + 8, // 8-13 km
+          visibility: 8 + ((lat + lon) % 5), // 8-13 km
           icon: condition.toLowerCase(),
           sunrise: new Date(
             now.getFullYear(),
@@ -94,8 +91,8 @@ const Weather = ({ darkMode }) => {
             30
           ),
         };
-
         setWeather(weatherData);
+        lastWeatherLocation.current = location;
         setLoading(false);
       } catch (err) {
         console.error("Error fetching weather data:", err);
@@ -103,7 +100,7 @@ const Weather = ({ darkMode }) => {
         setLoading(false);
       }
     },
-    [locationDetails, location]
+    [locationDetails, location, weather]
   );
 
   // Now define fetchLocationAndWeather
