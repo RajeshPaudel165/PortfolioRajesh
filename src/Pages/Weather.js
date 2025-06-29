@@ -387,33 +387,6 @@ const Weather = ({ darkMode }) => {
         <div className="weather-error">
           <FaExclamationTriangle size={24} style={{ marginBottom: "8px" }} />
           <p>{error}</p>
-          <div
-            style={{
-              fontSize: "12px",
-              marginTop: "10px",
-              padding: "10px",
-              backgroundColor: "#f0f0f0",
-              borderRadius: "5px",
-            }}
-          >
-            <strong>Debug Info:</strong>
-            <br />
-            API Key Present: {GOOGLE_MAPS_API_KEY ? "Yes" : "No"}
-            <br />
-            API Key Length:{" "}
-            {GOOGLE_MAPS_API_KEY ? GOOGLE_MAPS_API_KEY.length : 0}
-            <br />
-            NODE_ENV: {process.env.NODE_ENV}
-            <br />
-            All Env Vars:{" "}
-            {JSON.stringify({
-              REACT_APP_GOOGLE_MAPS_API_KEY: process.env
-                .REACT_APP_GOOGLE_MAPS_API_KEY
-                ? "Present"
-                : "Missing",
-              NODE_ENV: process.env.NODE_ENV,
-            })}
-          </div>
           <button onClick={handleRefresh}>Retry</button>
         </div>
       </div>
