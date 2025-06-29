@@ -367,7 +367,9 @@ const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
                       handleAppLongPress(app);
                     }}
                   >
-                    <div className="app-icon">{app.icon}</div>
+                    <div className="app-icon">
+                      {typeof app.icon === "function" ? app.icon() : app.icon}
+                    </div>
                     <div className="app-name">{app.name}</div>
                   </div>
                 ))}
@@ -410,7 +412,9 @@ const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
                     handleAppLongPress(app);
                   }}
                 >
-                  <div className="app-icon">{app.icon}</div>
+                  <div className="app-icon">
+                    {typeof app.icon === "function" ? app.icon() : app.icon}
+                  </div>
                   <div className="app-name">{app.name}</div>
                 </div>
               ))}
@@ -435,7 +439,11 @@ const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
           >
             <div className="modal-header">
               <div className="modal-app-info">
-                <div className="modal-app-icon">{selectedApp.icon}</div>
+                <div className="modal-app-icon">
+                  {typeof selectedApp.icon === "function"
+                    ? selectedApp.icon()
+                    : selectedApp.icon}
+                </div>
                 <div className="modal-app-details">
                   <h2 className="modal-app-name">{selectedApp.name}</h2>
                   <p className="modal-app-category">{selectedApp.category}</p>

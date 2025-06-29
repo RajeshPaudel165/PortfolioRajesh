@@ -97,7 +97,7 @@ const Dock = ({ apps, openWindows, onIconClick, darkMode, showLaunchpad }) => {
               onClick={() => onIconClick(app.id)}
               title={app.label}
             >
-              {app.icon}
+              {typeof app.icon === "function" ? app.icon() : app.icon}
             </button>
 
             {isRunning(app.id) && <div className="active-dot" />}

@@ -37,7 +37,7 @@ const allApps = [
     id: "flappy-bird",
     label: "Flappy Bird",
     component: FlappyBirdClassic,
-    icon: (
+    icon: () => (
       <img src={flappyBirdIcon} alt="Flappy Bird" style={{ width: "52px" }} />
     ),
     windowSize: { width: 400, height: 640 },
@@ -46,7 +46,7 @@ const allApps = [
     id: "calculator",
     label: "Calculator",
     component: Calculator,
-    icon: (
+    icon: () => (
       <img
         src={calculatorIcon}
         alt="Calculator"
@@ -59,7 +59,7 @@ const allApps = [
     id: "notes",
     label: "Notes",
     component: Notes,
-    icon: (
+    icon: () => (
       <img
         src={notesIcon}
         alt="Notes"
@@ -72,7 +72,7 @@ const allApps = [
     id: "weather",
     label: "Weather",
     component: Weather,
-    icon: (
+    icon: () => (
       <img
         src={weatherIcon}
         alt="Weather"
@@ -85,7 +85,7 @@ const allApps = [
     id: "music",
     label: "Music",
     component: MusicPlayer,
-    icon: (
+    icon: () => (
       <img
         src={musicIcon}
         alt="Music"
@@ -98,7 +98,7 @@ const allApps = [
     id: "messages",
     label: "Messages",
     component: Messages,
-    icon: (
+    icon: () => (
       <img
         src={messageIcon}
         alt="Messages"
@@ -116,7 +116,7 @@ const allApps = [
     id: "projects",
     label: "Projects",
     component: Projects,
-    icon: (
+    icon: () => (
       <img
         src={vscodeIcon}
         alt="Projects"
@@ -129,7 +129,7 @@ const allApps = [
     id: "skills",
     label: "Skills",
     component: Skills,
-    icon: (
+    icon: () => (
       <img
         src={docsIcon}
         alt="Skills"
@@ -142,7 +142,7 @@ const allApps = [
     id: "education",
     label: "Education",
     component: Education,
-    icon: (
+    icon: () => (
       <img
         src={educationIcon}
         alt="Education"
@@ -155,7 +155,7 @@ const allApps = [
     id: "task-master",
     label: "Task Master",
     component: TaskMaster,
-    icon: (
+    icon: () => (
       <div
         style={{
           width: "48px",
@@ -179,7 +179,7 @@ const allApps = [
     id: "recycle-bin",
     label: "Trash",
     component: RecycleBin,
-    icon: (
+    icon: () => (
       <img
         src={trashIcon}
         alt="Trash"
@@ -197,7 +197,7 @@ const allApps = [
     id: "app-store",
     label: "App Store",
     component: AppStore,
-    icon: (
+    icon: () => (
       <img
         src={appstoreIcon}
         alt="App Store"
@@ -210,7 +210,7 @@ const allApps = [
     id: "launchpad",
     label: "Launchpad",
     component: Launchpad,
-    icon: (
+    icon: () => (
       <img
         src={launchpadIcon}
         alt="Launchpad"
@@ -379,17 +379,7 @@ const Desktop = ({ darkMode }) => {
       const newWindow = {
         id: `image-viewer-${fileIcon.id}`,
         title: fileIcon.name,
-        component: () => (
-          <ImageViewer
-            darkMode={darkMode}
-            imageData={
-              fileIcon.imageData ||
-              fileIcon.data ||
-              "data:image/heic;base64,placeholder_for_heic_image"
-            }
-            imageName={fileIcon.name}
-          />
-        ),
+        component: ImageViewer,
         size: { width: 800, height: 600 },
         position: {
           x: Math.random() * 200 + 100,
@@ -397,6 +387,11 @@ const Desktop = ({ darkMode }) => {
         },
         isMinimized: false,
         zIndex: openWindows.length + 1,
+        imageData:
+          fileIcon.imageData ||
+          fileIcon.data ||
+          "data:image/heic;base64,placeholder_for_heic_image",
+        imageName: fileIcon.name,
       };
       setOpenWindows((prev) => [...prev, newWindow]);
     }
@@ -499,7 +494,7 @@ const Desktop = ({ darkMode }) => {
             }}
             onDoubleClick={() => handleIconOpen(app.id)}
           >
-            {app.icon}
+            {app.icon()}
           </DesktopIcon>
         ))}
 
@@ -548,6 +543,21 @@ const Desktop = ({ darkMode }) => {
 
         const WindowContent = win.component;
         const maxZ = Math.max(0, ...openWindows.map((w) => w.zIndex || 0));
+
+        // Prepare props for the component
+        const componentProps = {
+          darkMode: darkMode,
+          onAppInstalled: handleAppInstalled,
+        };
+
+        // Add ImageViewer specific props if they exist
+        if (win.imageData !== undefined) {
+          componentProps.imageData = win.imageData;
+        }
+        if (win.imageName !== undefined) {
+          componentProps.imageName = win.imageName;
+        }
+
         return (
           <Window
             key={win.id}
@@ -568,10 +578,7 @@ const Desktop = ({ darkMode }) => {
             bringToFront={() => bringWindowToFront(win.id)}
             onResize={handleResize}
           >
-            <WindowContent
-              darkMode={darkMode}
-              onAppInstalled={handleAppInstalled}
-            />
+            <WindowContent {...componentProps} />
           </Window>
         );
       })}

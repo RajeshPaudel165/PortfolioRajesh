@@ -292,7 +292,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       id: app.id,
       name: app.name,
       developer: app.developer,
-      icon: app.icon,
+      icon: typeof app.icon === "function" ? app.icon() : app.icon,
       version: app.version,
       installDate: new Date().toISOString(),
       size: app.size,
@@ -449,7 +449,9 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
                 {filteredApps.map((app) => (
                   <div key={app.id} className="app-tile">
                     <div className="app-tile-image">
-                      <div className="app-icon-large">{app.icon}</div>
+                      <div className="app-icon-large">
+                        {typeof app.icon === "function" ? app.icon() : app.icon}
+                      </div>
                     </div>
 
                     <div className="app-tile-content">
@@ -532,7 +534,11 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
           >
             <div className="modal-header">
               <div className="modal-app-info">
-                <div className="modal-app-icon">{selectedApp.icon}</div>
+                <div className="modal-app-icon">
+                  {typeof selectedApp.icon === "function"
+                    ? selectedApp.icon()
+                    : selectedApp.icon}
+                </div>
                 <div className="modal-app-details">
                   <h2 className="modal-app-name">{selectedApp.name}</h2>
                   <p className="modal-app-developer">{selectedApp.developer}</p>

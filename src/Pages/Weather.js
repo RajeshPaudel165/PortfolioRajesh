@@ -393,6 +393,18 @@ const Weather = ({ darkMode }) => {
     );
   }
 
+  // Add safety check for weather data
+  if (!weather) {
+    return (
+      <div className={`weather-app ${darkMode ? "dark-mode" : ""}`}>
+        <div className="weather-loading">
+          <div className="loading-spinner"></div>
+          <p>Loading weather data...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`weather-app ${darkMode ? "dark-mode" : ""}`}>
       <div className="weather-header">
