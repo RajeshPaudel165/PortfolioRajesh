@@ -236,7 +236,11 @@ function App() {
         />
       )}
       {aboutOpen && (
-        <About darkMode={darkMode} onClose={() => setAboutOpen(false)} />
+        <About
+          open={aboutOpen}
+          darkMode={darkMode}
+          onClose={() => setAboutOpen(false)}
+        />
       )}
     </div>
   );
