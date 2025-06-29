@@ -5,8 +5,8 @@ import { BsBatteryFull } from "react-icons/bs";
 
 const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [isViewMenuOpen, setIsViewMenuOpen] = useState(false); // State for dropdown visibility
-  const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState(false); // State for settings dropdown
+  const [isViewMenuOpen, setIsViewMenuOpen] = useState(false);
+  const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -32,9 +32,8 @@ const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
       <div className="menu-bar-left">
         <FaApple className="apple-logo" />
         <span className="menu-item-brand">Rajesh</span>
-        <span className="menu-item">Resume</span>
 
-        {/* --- Socials Dropdown Menu Logic --- */}
+        {/* Socials Dropdown Menu */}
         <div
           className="menu-item-container"
           onMouseEnter={() => setIsViewMenuOpen(true)}
@@ -52,7 +51,7 @@ const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
                 LinkedIn
               </a>
               <a
-                href="https://www.facebook.com/rajesh.paudel.965580"
+                href="https://www.facebook.com/rajesh.paudel.568"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="dropdown-item"
@@ -60,7 +59,7 @@ const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
                 Facebook
               </a>
               <a
-                href="https://www.instagram.com/_rajeshpaudel_/"
+                href="https://www.instagram.com/rajesh_paudel_/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="dropdown-item"
@@ -71,7 +70,7 @@ const MenuBar = ({ darkMode, toggleDarkMode, onAbout }) => {
           )}
         </div>
 
-        {/* --- Settings Dropdown Menu Logic --- */}
+        {/* Settings Dropdown Menu */}
         <div
           className="menu-item-container"
           onMouseEnter={() => setIsSettingsMenuOpen(true)}

@@ -113,7 +113,17 @@ const Window = ({
       className={`app-window ${!isActive ? "inactive" : ""} ${
         isMaximized ? "maximized" : ""
       } ${isMinimized ? "minimized" : ""}`}
-      style={style}
+      style={
+        isMaximized
+          ? {
+              width: "100vw",
+              height: "100vh",
+              left: 0,
+              top: 0,
+              zIndex: style.zIndex,
+            }
+          : style
+      }
       onClick={bringToFront}
     >
       <div className="window-header" onMouseDown={(e) => onDragStart(e, id)}>
@@ -288,7 +298,12 @@ const Window = ({
         </div>
         <div className="window-title">{title}</div>
       </div>
-      <div className="window-content">{children}</div>
+      <div
+        className="window-content"
+        style={{ height: "100%", minHeight: 0, minWidth: 0, overflow: "auto" }}
+      >
+        {children}
+      </div>
       <div
         className="window-resize-handle"
         onMouseDown={handleResizeStart}

@@ -406,3 +406,152 @@
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
+
+/* Light mode styling */
+.weather-app:not(.dark-mode) {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+}
+
+.weather-app:not(.dark-mode) .weather-header h2 {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.weather-app:not(.dark-mode) .weather-time {
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.weather-app:not(.dark-mode) .search-input {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+}
+
+.weather-app:not(.dark-mode) .search-input:focus-within {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.weather-app:not(.dark-mode) .search-input input {
+  color: #ffffff;
+}
+
+.weather-app:not(.dark-mode) .search-input input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.weather-app:not(.dark-mode) .search-input button {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.weather-app:not(.dark-mode) .search-input button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.weather-app:not(.dark-mode) .weather-location {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.weather-app:not(.dark-mode) .weather-temperature {
+  color: #ffffff;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.weather-app:not(.dark-mode) .weather-condition {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.weather-app:not(.dark-mode) .weather-feels-like {
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.weather-app:not(.dark-mode) .weather-detail-item {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+}
+
+.weather-app:not(.dark-mode) .weather-detail-item:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.weather-app:not(.dark-mode) .detail-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.weather-app:not(.dark-mode) .detail-value {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.weather-app:not(.dark-mode) .sun-item {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+}
+
+.weather-app:not(.dark-mode) .sun-item:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.weather-app:not(.dark-mode) .sun-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.weather-app:not(.dark-mode) .sun-time {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.weather-app:not(.dark-mode) .weather-footer p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.weather-app:not(.dark-mode) .refresh-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.weather-app:not(.dark-mode) .refresh-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.weather-app:not(.dark-mode) .weather-loading {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.weather-app:not(.dark-mode) .weather-loading p {
+  color: #ffffff;
+}
+
+.weather-app:not(.dark-mode) .weather-error {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.weather-app:not(.dark-mode) .weather-error p {
+  color: #ffffff;
+}
+
+.weather-app:not(.dark-mode) .weather-error button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.weather-app:not(.dark-mode) .weather-error button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}

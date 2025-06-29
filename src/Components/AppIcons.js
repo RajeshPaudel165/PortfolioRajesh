@@ -1,4 +1,12 @@
 import React from "react";
+import {
+  MdCalculate,
+  MdNote,
+  MdGames,
+  MdCheckCircle,
+  MdDelete,
+  MdPhoneIphone,
+} from "react-icons/md";
 
 // SVG Icons for dock apps
 export const ProjectsIcon = () => (
@@ -144,6 +152,7 @@ export const TrashIcon = () => (
 // Icon mapping function
 export const getAppIcon = (appId) => {
   const iconMap = {
+    launchpad: <LaunchpadIcon />,
     projects: <ProjectsIcon />,
     skills: <SkillsIcon />,
     education: <EducationIcon />,
@@ -151,23 +160,21 @@ export const getAppIcon = (appId) => {
     music: <MusicIcon />,
     messages: <MessagesIcon />,
     "app-store": <AppStoreIcon />,
-    launchpad: <LaunchpadIcon />,
     trash: <TrashIcon />,
   };
 
-  // Return SVG icon if available, otherwise return emoji fallback
   if (iconMap[appId]) {
     return iconMap[appId];
   }
 
-  // Fallback emoji icons for apps without SVG icons
-  const emojiMap = {
-    calculator: "🧮",
-    notes: "📝",
-    "flappy-bird": "🐦",
-    "task-master": "✅",
-    "recycle-bin": "🗑️",
+  // Fallback React icons for apps without SVG icons
+  const reactIconMap = {
+    calculator: <MdCalculate size={40} />,
+    notes: <MdNote size={40} />,
+    "flappy-bird": <MdGames size={40} />,
+    "task-master": <MdCheckCircle size={40} />,
+    "recycle-bin": <MdDelete size={40} />,
   };
 
-  return emojiMap[appId] || "📱";
+  return reactIconMap[appId] || <MdPhoneIphone size={40} />;
 };

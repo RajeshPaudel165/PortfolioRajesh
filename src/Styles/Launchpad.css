@@ -225,7 +225,8 @@
   font-weight: 500;
   white-space: nowrap;
   z-index: 1000;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Helvetica Neue", Arial, sans-serif;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -800,4 +801,31 @@
   .search-container {
     min-width: 120px;
   }
+}
+
+.launchpad-search-bar {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto 32px auto;
+}
+.launchpad-search-bar input {
+  width: 100%;
+  padding: 14px 44px 14px 18px;
+  border-radius: 18px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.15rem;
+  outline: none;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+.launchpad-search-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 1.1rem;
+  pointer-events: none;
 }

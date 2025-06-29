@@ -366,12 +366,151 @@
 
 /* Light mode styles */
 .messages-app:not(.dark-mode) {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f2f2f7;
-  --text-primary: #000000;
-  --text-secondary: #8e8e93;
-  --border-color: #c6c6c8;
-  --accent-color: #007aff;
+  --bg-primary: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  --bg-secondary: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-color: #dee2e6;
+  --accent-color: #007bff;
+  --accent-hover: #0056b3;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.messages-app:not(.dark-mode) .messages-header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.messages-app:not(.dark-mode) .messages-title h1 {
+  color: var(--text-primary);
+}
+
+.messages-app:not(.dark-mode) .stat-number {
+  color: var(--accent-color);
+}
+
+.messages-app:not(.dark-mode) .stat-label {
+  color: var(--text-secondary);
+}
+
+.messages-app:not(.dark-mode) .messages-sidebar {
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.messages-app:not(.dark-mode) .compose-section h3 {
+  color: var(--text-primary);
+}
+
+.messages-app:not(.dark-mode) .form-group label {
+  color: var(--text-primary);
+}
+
+.messages-app:not(.dark-mode) .form-group input,
+.messages-app:not(.dark-mode) .form-group textarea {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.messages-app:not(.dark-mode) .form-group input:focus,
+.messages-app:not(.dark-mode) .form-group textarea:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+}
+
+.messages-app:not(.dark-mode) .send-button {
+  background: linear-gradient(
+    135deg,
+    var(--accent-color) 0%,
+    var(--accent-hover) 100%
+  );
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.messages-app:not(.dark-mode) .send-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--accent-hover) 0%, #004085 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+}
+
+.messages-app:not(.dark-mode) .messages-list h3 {
+  color: var(--text-primary);
+}
+
+.messages-app:not(.dark-mode) .message-item {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.messages-app:not(.dark-mode) .message-item:hover {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.messages-app:not(.dark-mode) .message-sender {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.messages-app:not(.dark-mode) .message-subject {
+  color: var(--text-primary);
+}
+
+.messages-app:not(.dark-mode) .message-date {
+  color: var(--text-secondary);
+}
+
+.messages-app:not(.dark-mode) .message-status.sent {
+  color: var(--success-color);
+}
+
+.messages-app:not(.dark-mode) .delete-message-btn {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+}
+
+.messages-app:not(.dark-mode) .delete-message-btn:hover {
+  background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
+}
+
+.messages-app:not(.dark-mode) .message-email {
+  color: var(--accent-color);
+}
+
+.messages-app:not(.dark-mode) .empty-messages {
+  color: var(--text-secondary);
+}
+
+.messages-app:not(.dark-mode) .empty-messages h3 {
+  color: var(--text-primary);
+}
+
+.messages-app:not(.dark-mode) .messages-footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.messages-app:not(.dark-mode) .messages-footer p {
+  color: var(--text-secondary);
+}
+
+.messages-app:not(.dark-mode) .contact-info {
+  color: var(--accent-color);
 }
 
 /* Responsive design */

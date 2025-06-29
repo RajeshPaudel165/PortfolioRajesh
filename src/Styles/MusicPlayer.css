@@ -583,11 +583,11 @@
 
 /* Light mode adjustments */
 .light-mode .music-player {
-  background-color: #ffffff;
+  background: linear-gradient(135deg, #f5f5f7 0%, #e5e5e7 100%);
 }
 
 .light-mode .music-header {
-  border-bottom-color: #e5e5e7;
+  border-bottom: 1px solid #d1d1d6;
 }
 
 .light-mode .music-header h2 {
@@ -599,8 +599,43 @@
 }
 
 .light-mode .control-btn:hover {
-  background-color: #f5f5f7;
+  background-color: #e5e5e7;
   color: #1d1d1f;
+}
+
+.light-mode .control-btn.active {
+  color: #1db954;
+}
+
+.light-mode .search-input {
+  background-color: #ffffff;
+  border: 1px solid #d1d1d6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .search-input:focus-within {
+  border-color: #007aff;
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
+}
+
+.light-mode .search-input input {
+  color: #1d1d1f;
+}
+
+.light-mode .search-input input::placeholder {
+  color: #86868b;
+}
+
+.light-mode .search-track {
+  background-color: #ffffff;
+  border: 1px solid #d1d1d6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .search-track:hover {
+  background-color: #f5f5f7;
+  border-color: #1db954;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .light-mode .track-title {
@@ -617,7 +652,7 @@
 }
 
 .light-mode .volume-control {
-  color: #86868b;
+  color: #1d1d1f;
 }
 
 .light-mode .volume-slider {
@@ -626,6 +661,10 @@
 
 .light-mode .like-btn {
   color: #86868b;
+}
+
+.light-mode .like-btn:hover {
+  color: #1db954;
 }
 
 .light-mode .playlist h4 {
@@ -637,7 +676,8 @@
 }
 
 .light-mode .playlist-track.active {
-  background-color: #1db954;
+  background-color: #007aff;
+  color: #ffffff;
 }
 
 .light-mode .track-name {
@@ -650,12 +690,12 @@
 }
 
 .light-mode .playlist-track.active .track-name {
-  color: #000000;
+  color: #ffffff;
 }
 
 .light-mode .playlist-track.active .track-artist-small,
 .light-mode .playlist-track.active .track-duration {
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .player-controls-section {

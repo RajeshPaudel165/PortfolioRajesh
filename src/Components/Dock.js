@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "../Styles/Dock.css"; // We will create this file next
 
 const Dock = ({ apps, openWindows, onIconClick, darkMode, showLaunchpad }) => {
-  const [isVisible, setIsVisible] = useState(true); // Start visible by default
+  const [isVisible, setIsVisible] = useState(true);
   const dockRef = useRef(null);
   const hideTimeoutRef = useRef(null);
 
@@ -18,13 +18,19 @@ const Dock = ({ apps, openWindows, onIconClick, darkMode, showLaunchpad }) => {
   // Check if any apps are currently open
   const hasOpenApps = openWindows.length > 0 || showLaunchpad;
 
-  // Mouse tracking for auto-hide (only when apps are open)
+  // macOS-style mouse tracking for auto-hide
   useEffect(() => {
+    // Always show dock if no apps are open
+    if (!hasOpenApps) {
+      setIsVisible(true);
+      return;
+    }
+
+    // Only track mouse when apps are open
     const handleMouseMove = (e) => {
-      if (!hasOpenApps) return;
       const mouseY = e.clientY;
       const windowHeight = window.innerHeight;
-      const showThreshold = 100;
+      const showThreshold = 80;
       const isNearBottom = mouseY > windowHeight - showThreshold;
       if (isNearBottom) {
         setIsVisible(true);
@@ -41,16 +47,16 @@ const Dock = ({ apps, openWindows, onIconClick, darkMode, showLaunchpad }) => {
         }, 500);
       }
     };
+
     const handleMouseEnter = () => {
-      if (!hasOpenApps) return;
       setIsVisible(true);
       if (hideTimeoutRef.current) {
         clearTimeout(hideTimeoutRef.current);
         hideTimeoutRef.current = null;
       }
     };
+
     const handleMouseLeave = () => {
-      if (!hasOpenApps) return;
       if (hideTimeoutRef.current) {
         clearTimeout(hideTimeoutRef.current);
       }
@@ -58,15 +64,14 @@ const Dock = ({ apps, openWindows, onIconClick, darkMode, showLaunchpad }) => {
         setIsVisible(false);
       }, 500);
     };
-    let dockElement = null;
-    if (hasOpenApps) {
-      document.addEventListener("mousemove", handleMouseMove);
-      dockElement = dockRef.current;
-      if (dockElement) {
-        dockElement.addEventListener("mouseenter", handleMouseEnter);
-        dockElement.addEventListener("mouseleave", handleMouseLeave);
-      }
+
+    document.addEventListener("mousemove", handleMouseMove);
+    const dockElement = dockRef.current;
+    if (dockElement) {
+      dockElement.addEventListener("mouseenter", handleMouseEnter);
+      dockElement.addEventListener("mouseleave", handleMouseLeave);
     }
+
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       if (dockElement) {
@@ -77,16 +82,6 @@ const Dock = ({ apps, openWindows, onIconClick, darkMode, showLaunchpad }) => {
         clearTimeout(hideTimeoutRef.current);
       }
     };
-  }, [hasOpenApps]);
-
-  // Hide dock when apps are open, show when no apps
-  useEffect(() => {
-    if (hasOpenApps) {
-      setIsVisible(false);
-    } else {
-      // Always show dock when no apps are open
-      setIsVisible(true);
-    }
   }, [hasOpenApps]);
 
   return (

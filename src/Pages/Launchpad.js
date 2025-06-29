@@ -10,6 +10,9 @@ import docsIcon from "../assets/docs-icon.png";
 import vscodeIcon from "../assets/vscode-icon.png";
 import launchpadIcon from "../assets/launchpad.webp";
 import appstoreIcon from "../assets/appstore.webp";
+import messageIcon from "../assets/message.png";
+import { FaSearch } from "react-icons/fa";
+import { MdAssignment, MdDelete } from "react-icons/md";
 
 const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -97,6 +100,19 @@ const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
       builtIn: true,
     },
     {
+      id: "messages",
+      name: "Messages",
+      icon: (
+        <img
+          src={messageIcon}
+          alt="Messages"
+          style={{ width: "64px", height: "64px" }}
+        />
+      ),
+      category: "Communication",
+      builtIn: true,
+    },
+    {
       id: "education",
       name: "Education",
       icon: (
@@ -148,12 +164,11 @@ const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "32px",
             color: "white",
             boxShadow: "0 4px 20px rgba(0, 122, 255, 0.3)",
           }}
         >
-          📋
+          <MdAssignment size={40} />
         </div>
       ),
       category: "Productivity",
@@ -167,13 +182,12 @@ const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
           style={{
             width: "64px",
             height: "64px",
-            fontSize: "48px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          🗑️
+          <MdDelete size={48} />
         </div>
       ),
       category: "Utilities",
@@ -316,24 +330,7 @@ const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
       <div className="launchpad-container">
         {/* Top Bar */}
         <div className="launchpad-topbar">
-          <div className="search-container">
-            <div className="search-icon">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+          <div className="launchpad-search-bar">
             <input
               type="text"
               placeholder="Search"
@@ -342,29 +339,7 @@ const Launchpad = ({ darkMode, onAppLaunch, isVisible, onClose }) => {
               className="search-input"
               autoFocus={isVisible}
             />
-            {searchQuery && (
-              <button
-                className="clear-search-btn"
-                onClick={() => setSearchQuery("")}
-                title="Clear search"
-              >
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M18 6L6 18M6 6L18 18"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            )}
+            <FaSearch className="launchpad-search-icon" />
           </div>
           <button className="close-button" onClick={onClose}>
             <span className="close-icon">×</span>

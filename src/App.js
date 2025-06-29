@@ -20,7 +20,6 @@ function App() {
   const [showLaunchpad, setShowLaunchpad] = useState(false);
   const [showAppStore, setShowAppStore] = useState(false);
   const [showMobileWarning, setShowMobileWarning] = useState(false);
-  const [wallpaper, setWallpaper] = useState("default");
   const [bootPhase, setBootPhase] = useState("start"); // start, booting, lock, desktop
   const [bootFade, setBootFade] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -78,7 +77,6 @@ function App() {
       const newApp = {
         id: appId,
         title: getAppTitle(appId),
-        icon: getAppIcon(appId),
         zIndex: openApps.length + 1,
       };
       setOpenApps([...openApps, newApp]);
@@ -124,23 +122,6 @@ function App() {
     return titles[appId] || appId;
   };
 
-  const getAppIcon = (appId) => {
-    const icons = {
-      calculator: "🧮",
-      notes: "📝",
-      weather: "🌤️",
-      music: "🎵",
-      education: "🎓",
-      projects: "💼",
-      skills: "⚡",
-      "flappy-bird": "🐦",
-      "task-master": "✅",
-      messages: "💬",
-      "recycle-bin": "🗑️",
-    };
-    return icons[appId] || "📱";
-  };
-
   const handleAppInstalled = (app) => {
     // Handle app installation from App Store
   };
@@ -152,7 +133,7 @@ function App() {
     return <BootScreen showProgressBar fadeOut={bootFade} />;
   }
   if (bootPhase === "lock") {
-    return <LockScreen wallpaper={wallpaper} />;
+    return <LockScreen darkMode={darkMode} />;
   }
 
   // Mobile warning overlay
@@ -198,50 +179,21 @@ function App() {
                 <FaLinkedin />
               </a>
               <a
-                href="https://www.instagram.com/_rajeshpaudel_/"
+                href="https://www.instagram.com/rajesh_paudel_/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "#E4405F", fontSize: 32 }}
+                style={{ color: "#e4405f", fontSize: 32 }}
               >
                 <FaInstagram />
               </a>
               <a
-                href="https://www.facebook.com/rajesh.paudel.965580"
+                href="https://www.facebook.com/rajesh.paudel.568"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "#1877f3", fontSize: 32 }}
+                style={{ color: "#1877f2", fontSize: 32 }}
               >
                 <FaFacebook />
               </a>
-            </div>
-            <div style={{ color: "#aaa", fontSize: 13, marginTop: 8 }}>
-              <div>
-                LinkedIn:{" "}
-                <a
-                  href="https://www.linkedin.com/in/rajesh-paudel-822022371/"
-                  style={{ color: "#0077b5" }}
-                >
-                  rajesh-paudel-822022371
-                </a>
-              </div>
-              <div>
-                Instagram:{" "}
-                <a
-                  href="https://www.instagram.com/_rajeshpaudel_/"
-                  style={{ color: "#E4405F" }}
-                >
-                  _rajeshpaudel_
-                </a>
-              </div>
-              <div>
-                Facebook:{" "}
-                <a
-                  href="https://www.facebook.com/rajesh.paudel.965580"
-                  style={{ color: "#1877f3" }}
-                >
-                  rajesh.paudel.965580
-                </a>
-              </div>
             </div>
           </div>
         </div>
@@ -267,8 +219,6 @@ function App() {
         setShowLaunchpad={setShowLaunchpad}
         showAppStore={showAppStore}
         setShowAppStore={setShowAppStore}
-        wallpaper={wallpaper}
-        setWallpaper={setWallpaper}
       />
       {showLaunchpad && (
         <Launchpad
@@ -279,13 +229,15 @@ function App() {
         />
       )}
       {showAppStore && (
-        <AppStore darkMode={darkMode} onAppInstalled={handleAppInstalled} />
+        <AppStore
+          darkMode={darkMode}
+          onAppInstalled={handleAppInstalled}
+          onClose={() => setShowAppStore(false)}
+        />
       )}
-      <About
-        open={aboutOpen}
-        onClose={() => setAboutOpen(false)}
-        darkMode={darkMode}
-      />
+      {aboutOpen && (
+        <About darkMode={darkMode} onClose={() => setAboutOpen(false)} />
+      )}
     </div>
   );
 }

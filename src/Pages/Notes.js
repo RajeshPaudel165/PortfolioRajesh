@@ -9,9 +9,11 @@ const Notes = ({ darkMode }) => {
       : [
           {
             id: 1,
-            title: "Welcome Note",
-            content:
-              "Welcome to Notes! Click 'New Note' to create your first note.\n\nYou can:\n• Write and edit text\n• Save automatically\n• Create multiple notes\n• Delete notes you don't need\n\nHappy note-taking! 📝",
+            title: "Rajesh's TODO",
+            content: `Build something awesome today!
+Drink water 
+Take a break and stretch 
+Learn something new`,
             timestamp: new Date().toISOString(),
           },
         ];

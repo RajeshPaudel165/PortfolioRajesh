@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import "../Styles/Desktop.css";
 import Window from "./Window";
 import Dock from "./Dock";
 import DesktopIcon from "./DesktopIcon";
@@ -16,8 +17,8 @@ import Launchpad from "../Pages/Launchpad";
 import TaskMaster from "../Pages/TaskMaster";
 import ImageViewer from "../Pages/ImageViewer";
 import Messages from "../Pages/Messages";
-import wallpaper from "../assets/macOS.png";
-import macOSdark from "../assets/macOSdark.jpg";
+import wallpaper from "../assets/macOS.jpg";
+import macOSdark from "../assets/macOSdark.png";
 import flappyBirdIcon from "../assets/flappybird.png";
 import calculatorIcon from "../assets/calculator-icon.png";
 import notesIcon from "../assets/notes-icon.png";
@@ -203,7 +204,7 @@ const allApps = [
         style={{ width: "48px", height: "48px" }}
       />
     ),
-    windowSize: { width: 1000, height: 700 },
+    windowSize: { width: 800, height: 600 },
   },
   {
     id: "launchpad",
@@ -589,24 +590,6 @@ const Desktop = ({ darkMode }) => {
         onAppLaunch={handleAppLaunch}
         isVisible={showLaunchpad}
         onClose={() => setShowLaunchpad(false)}
-      />
-
-      {/* Launchpad Trigger - Invisible button for gesture support */}
-      <div
-        className="launchpad-trigger"
-        onClick={() => setShowLaunchpad(true)}
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "100px",
-          height: "100px",
-          opacity: 0,
-          cursor: "pointer",
-          zIndex: 1,
-        }}
-        title="Click or press F4 to open Launchpad"
       />
     </div>
   );

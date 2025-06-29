@@ -1,5 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/RecycleBin.css";
+import {
+  MdDelete,
+  MdRestore,
+  MdInsertDriveFile,
+  MdFolder,
+  MdImage,
+  MdMovie,
+  MdAudiotrack,
+  MdPictureAsPdf,
+  MdCode,
+  MdClose,
+  MdList,
+  MdGridOn,
+} from "react-icons/md";
+import { FaInbox } from "react-icons/fa";
 
 const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
   const [deletedItems, setDeletedItems] = useState([
@@ -50,23 +65,22 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
   const getFileIcon = (type) => {
     switch (type) {
       case "folder":
-        return "📁";
+        return <MdFolder size={28} />;
       case "image":
-        return "🖼️";
       case "heic":
-        return "📸";
+        return <MdImage size={28} />;
       case "document":
-        return "📄";
+        return <MdInsertDriveFile size={28} />;
       case "video":
-        return "🎥";
+        return <MdMovie size={28} />;
       case "audio":
-        return "🎵";
+        return <MdAudiotrack size={28} />;
       case "pdf":
-        return "📕";
+        return <MdPictureAsPdf size={28} />;
       case "code":
-        return "💻";
+        return <MdCode size={28} />;
       default:
-        return "📄";
+        return <MdInsertDriveFile size={28} />;
     }
   };
 
@@ -211,7 +225,9 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
     >
       <div className="recycle-bin-header">
         <div className="recycle-bin-title">
-          <span className="trash-icon">🗑️</span>
+          <span className="trash-icon">
+            <MdDelete size={24} />
+          </span>
           <h2>Trash</h2>
         </div>
         <div className="recycle-bin-actions">
@@ -220,6 +236,10 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
             onClick={handleRestore}
             disabled={selectedItems.length === 0}
           >
+            <MdRestore
+              size={18}
+              style={{ verticalAlign: "middle", marginRight: 4 }}
+            />{" "}
             Restore
           </button>
           <button
@@ -227,6 +247,10 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
             onClick={handleEmptyTrash}
             disabled={deletedItems.length === 0}
           >
+            <MdDelete
+              size={18}
+              style={{ verticalAlign: "middle", marginRight: 4 }}
+            />{" "}
             Empty Trash
           </button>
         </div>
@@ -239,14 +263,14 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
             onClick={() => setViewMode("list")}
             title="List View"
           >
-            📋
+            <MdList size={20} />
           </button>
           <button
             className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
             onClick={() => setViewMode("grid")}
             title="Grid View"
           >
-            🔲
+            <MdGridOn size={20} />
           </button>
         </div>
         <div className="selection-controls">
@@ -261,7 +285,9 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
       <div className="recycle-bin-content">
         {deletedItems.length === 0 ? (
           <div className="empty-trash">
-            <div className="empty-icon">🗑️</div>
+            <div className="empty-icon">
+              <FaInbox size={40} />
+            </div>
             <p>Trash is empty</p>
             <span>
               Drag files here to delete them, or items you delete will appear
@@ -323,7 +349,7 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
             <div className="preview-header">
               <h3>{previewItem.name}</h3>
               <button className="close-preview" onClick={closePreview}>
-                ✕
+                <MdClose size={20} />
               </button>
             </div>
             <div className="preview-body">
@@ -354,6 +380,10 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
                     closePreview();
                   }}
                 >
+                  <MdRestore
+                    size={18}
+                    style={{ verticalAlign: "middle", marginRight: 4 }}
+                  />{" "}
                   Restore
                 </button>
               </div>
