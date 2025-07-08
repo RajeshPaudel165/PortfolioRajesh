@@ -11,7 +11,7 @@ import {
 import { SiTypescript } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
 
-const Skills = () => {
+const Skills = ({ darkMode }) => {
   const languages = ["Python", "C"];
   const webDevelopment = ["HTML/CSS", "JavaScript", "ReactJS", "TypeScript"];
   const tools = ["Visual Studio", "Figma"];
@@ -28,7 +28,7 @@ const Skills = () => {
   };
 
   return (
-    <div className="skills-page-container">
+    <div className={`skills-page-container ${darkMode ? "dark-mode" : ""}`}>
       <div className="skills-header">
         <h1>Skills & Competencies</h1>
         <p>A summary of my technical abilities and tools I use.</p>

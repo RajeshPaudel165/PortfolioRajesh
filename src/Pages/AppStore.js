@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/AppStore.css";
 import {
-  FaStore,
   FaSearch,
   FaStar,
   FaCalculator,
@@ -355,9 +354,6 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
       <div className="app-store-navbar">
         <div className="navbar-left">
           <div className="store-logo">
-            <span className="store-icon">
-              <FaStore />
-            </span>
             <span className="store-text">App Store</span>
           </div>
         </div>
@@ -516,7 +512,7 @@ const AppStore = ({ darkMode, onAppInstalled }) => {
               </div>
             ) : (
               <div className="no-results">
-                <div className="no-results-icon">🔍</div>
+                <div className="no-results-icon"></div>
                 <h3>No apps found</h3>
                 <p>Try adjusting your search or browse different categories</p>
               </div>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../Styles/Projects.css";
 import {
-  FaBriefcase,
   FaGamepad,
   FaBus,
   FaGraduationCap,
@@ -109,9 +108,6 @@ const Projects = ({ darkMode }) => {
     <div className={`projects-app ${darkMode ? "dark-mode" : "light-mode"}`}>
       <div className="projects-header">
         <div className="projects-title">
-          <div className="projects-icon">
-            <FaBriefcase size={24} />
-          </div>
           <h1>Projects</h1>
         </div>
         <div className="projects-stats">

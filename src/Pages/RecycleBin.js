@@ -218,16 +218,15 @@ const RecycleBin = ({ darkMode, onFileDeleted, onFileRestored }) => {
 
   return (
     <div
-      className={`recycle-bin ${isDragOver ? "drag-over" : ""}`}
+      className={`recycle-bin ${darkMode ? "dark-mode" : ""} ${
+        isDragOver ? "drag-over" : ""
+      }`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       <div className="recycle-bin-header">
         <div className="recycle-bin-title">
-          <span className="trash-icon">
-            <MdDelete size={24} />
-          </span>
           <h2>Trash</h2>
         </div>
         <div className="recycle-bin-actions">

@@ -444,27 +444,63 @@ const Desktop = ({ darkMode }) => {
     if (!winEl || !deskEl) return;
     const winRect = winEl.getBoundingClientRect();
     const deskRect = deskEl.getBoundingClientRect();
+
+    // Find the current window to get its size
+    const currentWindow = openWindows.find((w) => w.id === windowId);
+    if (!currentWindow) return;
+
     dragData.current = {
       id: windowId,
       offsetX: e.clientX - winRect.left,
       offsetY: e.clientY - winRect.top,
       desktopLeft: deskRect.left,
       desktopTop: deskRect.top,
+      windowWidth: currentWindow.size.width,
+      windowHeight: currentWindow.size.height,
     };
     document.addEventListener("mousemove", handleDragMove);
     document.addEventListener("mouseup", handleDragEnd, { once: true });
   };
   const handleDragMove = (e) => {
     if (!dragData.current) return;
-    const { id, offsetX, offsetY, desktopLeft, desktopTop } = dragData.current;
+    const {
+      id,
+      offsetX,
+      offsetY,
+      desktopLeft,
+      desktopTop,
+      windowWidth,
+      windowHeight,
+    } = dragData.current;
+
+    // Calculate new position
+    let newX = e.clientX - offsetX - desktopLeft;
+    let newY = e.clientY - offsetY - desktopTop;
+
+    // Get desktop dimensions
+    const desktopEl = desktopRef.current;
+    if (!desktopEl) return;
+    const desktopRect = desktopEl.getBoundingClientRect();
+
+    // Define boundaries
+    const menuBarHeight = 0; // Height of the menu bar
+    const minX = 0;
+    const maxX = desktopRect.width - windowWidth;
+    const minY = menuBarHeight; // Don't allow dragging above menu bar
+    const maxY = desktopRect.height - windowHeight - 0; // Leave space for dock
+
+    // Constrain the position within boundaries
+    newX = Math.max(minX, Math.min(maxX, newX));
+    newY = Math.max(minY, Math.min(maxY, newY));
+
     setOpenWindows((prev) =>
       prev.map((w) =>
         w.id === id
           ? {
               ...w,
               position: {
-                x: e.clientX - offsetX - desktopLeft,
-                y: e.clientY - offsetY - desktopTop,
+                x: newX,
+                y: newY,
               },
             }
           : w

@@ -20,7 +20,6 @@ const ImageViewer = ({ darkMode, imageData, imageName }) => {
     imageData?.includes("placeholder_for_heic_image");
 
   useEffect(() => {
-    // If it's a HEIC image, show placeholder immediately
     if (isHEIC) {
       setShowPlaceholder(true);
     }
